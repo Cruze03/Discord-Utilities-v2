@@ -1,0 +1,39 @@
+"DiscordUtilitiesv2"
+{
+	"BOT_TOKEN"
+	{
+		"key"				""
+	}
+	"API_KEY"
+	{
+		"key"				""
+	}
+	"CHANNEL_IDS"
+	{
+		"map"				""
+		"chat"				""
+		"verification"		""
+	}
+	"MESSAGE_IDS"
+	{
+		"map"				""
+		"verification"		""
+	}
+	"WEBHOOKS"
+	{
+		"chat"				""
+	}
+	"VERIFICATION_SETTINGS"
+	{
+		"primary"			"1"
+		"serverid"			"1"
+		"guildid"			""
+		"roleid"			""
+		"invite_link"		"https://discord.gg/ufKszVQPTK"
+		"command"			"!link"
+		"command_ingame"	"sm_verify"
+		"blocked_commands"	"sm_ws, sm_knife, sm_store"
+		"database_name"		"du"
+		"table_name"		"du_users"
+	}
+}
