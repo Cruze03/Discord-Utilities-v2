@@ -1,5 +1,8 @@
 # Not recommended in server with a lot of players YET because it may still have some memory leaks
 
+## Requirements
+**-** [**New Discord API Plugin**](https://github.com/Cruze03/discord-api/blob/main/discord_api.smx) (Remove the old one to avoid conflicts
+
 ## Server Details Module
 - Open `addons/sourcemod/configs/DiscordUtilitiesv2.txt`
 - Fill up the `key` in `BOT_TOKEN` section with your **BOT's Token Key**.
