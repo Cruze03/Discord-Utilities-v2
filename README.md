@@ -9,6 +9,8 @@
 - Fill `map` in `CHANNEL_IDS` section with your server details **Channel ID**.
 - Type `sm_du_refresh` in your in-game client console.
 
+![Server Details](https://cdn.discordapp.com/attachments/756189500828549271/1010849510559330384/server_details.png)
+
 ## Chat Relay Module
 - Open `addons/sourcemod/configs/DiscordUtilitiesv2.txt`
 - Fill up the `key` in `BOT_TOKEN` section with your **BOT's Token Key**.
@@ -16,6 +18,9 @@
 - Fill `chat` in `CHANNEL_IDS` section with your chat relay **Channel ID**.
 - Fill `chat` in `WEBHOOKS` section with your chat relay **Webhook URL**.
 - Type `sm_du_refresh` in your in-game client console.
+
+![Chat Relay](https://cdn.discordapp.com/attachments/756189500828549271/1010851311358586931/chat_relay1.png)
+![Chat Relay](https://cdn.discordapp.com/attachments/756189500828549271/1010851312038072400/chat_relay2.png)
 
 ## Verification Module
 - Open `addons/sourcemod/configs/DiscordUtilitiesv2.txt`
@@ -32,6 +37,8 @@
 - Fill `database_name` in `VERIFICATION_SETTINGS` section with database entry name in `configs/database.cfg`
 - Fill `table_name` in `VERIFICATION_SETTINGS` section with table name that will be created inside the database.
 - Type `sm_du_refresh` in your in-game client console.
+
+![Verification](https://cdn.discordapp.com/attachments/756189500828549271/1010850115101147156/verification.png)
 
 **[Recommended]** Create a password protected, less slots server (1-5) and mark that as the "primary" server. Keep these convars values to avoid map change in that server: `sv_hibernate_when_empty 0;mp_maxrounds 99999;mp_roundtime 60;mp_roundtime_defuse 60`
 
