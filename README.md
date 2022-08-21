@@ -32,4 +32,4 @@
 
 **[Recommended]** Create a password protected, less slots server (1-5) and mark that as the "primary" server. Keep these convars values to avoid map change in that server: `sv_hibernate_when_empty 0;mp_maxrounds 99999;mp_roundtime 60;mp_roundtime_defuse 60`
 
-**NOTE: `map` & `verification` keys in `MESSAGE_IDS` section are meant to be kept empty. Plugin will automatically add **message id** there. If you want to re-put a message in your respective channel, just keep remove the id and reload the current map.**
+**NOTE: `map` & `verification` keys in `MESSAGE_IDS` section are meant to be kept empty. Plugin will automatically add **message id** there. If you want to re-put a message in your respective channel, just remove the id and reload the current map.**
