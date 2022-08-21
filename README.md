@@ -1,4 +1,4 @@
-# Not recommended in server with a lot of players YET
+# Not recommended in server with a lot of players YET because it may still have some memory leaks
 
 ## Server Details Module
 - Open `addons/sourcemod/configs/DiscordUtilitiesv2.txt`
