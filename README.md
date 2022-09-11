@@ -1,7 +1,11 @@
 # Not recommended in server with a lot of players YET because it may still have some memory leaks
 
-## Requirements
-**-** [**New Discord API Plugin**](https://github.com/Cruze03/discord-api/blob/main/discord_api.smx) (Remove the old one to avoid conflicts
+## Requirements to run these plugin(s)
+**-** [**New Discord API Plugin**](https://github.com/Cruze03/discord-api/blob/main/discord_api.smx) (Remove the [old one](https://github.com/Cruze03/sourcemod-discord/blob/master/discord_api.smx) to avoid conflicts)
+
+## Main Module
+- This is needed for all the other modules.
+- Consists how to retrieve and store data to config.
 
 ## Server Details Module
 - Open `addons/sourcemod/configs/DiscordUtilitiesv2.txt`
@@ -42,4 +46,4 @@
 
 **[Recommended]** Create a password protected, less slots server (1-5) and mark that as the "primary" server. Keep these convars values to avoid map change in that server: `sv_hibernate_when_empty 0;mp_maxrounds 99999;mp_roundtime 60;mp_roundtime_defuse 60`
 
-**NOTE: `map` & `verification` keys in `MESSAGE_IDS` section are meant to be kept empty. Plugin will automatically add **message id** there. If you want to re-put a message in your respective channel, just remove the id and reload the current map.**
+**NOTE: `map` & `verification` keys in `MESSAGE_IDS` section are automatically added with **message id** by the respective plugins. If you want to add a new message in your respective channel, just remove the id from `map` or `verification` keys in `MESSAGE_IDS` section and reload the current map.**
