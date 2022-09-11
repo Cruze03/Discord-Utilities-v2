@@ -1,0 +1,84 @@
+"Phrases"
+{
+	"DateTime_Format"
+	{
+		"en"		"{DATE}-{MONTH}-{YEAR} {HOUR}:{MINUTES}:{SECONDS}"
+	}
+	"LastEdited"
+	{
+		"#format"	"{1:s}"
+		"en"		"Last Edited: {1} [GMT +5:30]"
+	}
+	"TeamScore"
+	{
+		"#format"	"{1:i},{2:i}"
+		"en"		"CT: {1} | T: {2}"
+	}
+	"Unknown"
+	{
+		"en"		"N/A"
+	}
+	"Warmup"
+	{
+		"en"		"WARMUP"
+	}
+	"RoundsLeft"
+	{
+		"#format"	"{1:i}"
+		"en"		"{1} rounds left"
+	}
+	"LastRound"
+	{
+		"en"		"This is the last round"
+	}
+	"CurrentMap"
+	{
+		"en"		"Current Map:"
+	}
+	"OnlinePlayers"
+	{
+		"en"		"Online Players:"
+	}
+	"TeamScoreTitle"
+	{
+		"en"		"Team Score:"
+	}
+	"RoundTimeleft"
+	{
+		"en"		"Round Timeleft:"
+	}
+	"Timeleft"
+	{
+		"en"		"Timeleft:"
+	}
+	"TimeleftFormat1"
+	{
+		"#format"	"{1:i},{2:i}" 			// 1 - Hour | 2 - minutes [Used in timeleft]
+		"en"		"{1} h. {2} m. left"
+	}
+	"TimeleftFormat2"
+	{
+		"#format"	"{1:i}" 				// 1 - minutes [Used in timeleft]
+		"en"		"{1} m. left"
+	}
+	"TimeleftFormat3"
+	{
+		"#format"	"{1:i}" 				// 1 - seconds [Used in timeleft]
+		"en"		"{1} s. left"
+	}
+	"RoundTimeleftFormat1"
+	{
+		"#format"	"{1:i},{2:i},{3:i}"		 // 1 - Hour | 2 - minutes | 3 - seconds [Used in timeleft]
+		"en"		"{1} h. {2} m. {3} s."
+	}
+	"RoundTimeleftFormat2"
+	{
+		"#format"	"{1:i},{2:i}" 			// 1 - minutes | 2 - seconds [Used in timeleft]
+		"en"		"{1} m. {2} s."
+	}
+	"RoundTimeleftFormat3"
+	{
+		"#format"	"{1:i}" 				// 1 - seconds [Used in timeleft]
+		"en"		"{1} s."
+	}
+}
