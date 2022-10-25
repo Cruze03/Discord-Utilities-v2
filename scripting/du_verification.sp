@@ -80,7 +80,7 @@ public Plugin myinfo =
 	name = "[Discord Utilities v2] Verification",
 	author = "Cruze",
 	description = "Verification module to integrate.",
-	version = "1.0",
+	version = DU_VERSION,
 	url = "https://github.com/Cruze03"
 };
 
@@ -178,6 +178,10 @@ void AddMessage()
 	{
 		return;
 	}
+	if(!g_bPrimary)
+	{
+		return;
+	}
 	char sBuf[666];
 	
 	DiscordMessage message = new DiscordMessage(" ");
@@ -201,7 +205,8 @@ void AddMessage()
 	message.Embed(embed);
 	
 	DUMain_Bot().SendMessageToChannelID(g_sChannelID, message);
-	json_cleanup_and_delete(message);
+	
+	DisposeObject(message);
 	
 	LogMessage("[SM] Added a verification info message in the channel!");
 	
@@ -527,14 +532,14 @@ void SendMessageToChannelID(const char[] channelid, const char[] sMessage)
 {
 	DiscordMessage dmMessage = new DiscordMessage(sMessage);
 	DUMain_Bot().SendMessageToChannelID(channelid, dmMessage);
-	json_cleanup_and_delete(dmMessage);
+	DisposeObject(dmMessage);
 }
 
 void SendMessageToChannel(DiscordChannel channel, const char[] sMessage)
 {
 	DiscordMessage dmMessage = new DiscordMessage(sMessage);
 	DUMain_Bot().SendMessageToChannel(channel, dmMessage);
-	json_cleanup_and_delete(dmMessage);
+	DisposeObject(dmMessage);
 }
 
 public int SQLQuery_LinkedAccount(Database db, DBResultSet results, const char[] error, any userid)
@@ -681,6 +686,7 @@ public void OnChannelReceived(DiscordBot bot, DiscordChannel channel)
 	g_sChannelName[0] = '#';
 	channel.GetName(g_sChannelName[1], 64);
 	
+	bot.StopListeningToChannel(channel);
 	bot.StartListeningToChannel(channel, OnMessageReceived);
 	
 	CreateTimer(5.0, Timer_AddMessage);
@@ -707,6 +713,7 @@ public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMes
 			DUMain_UpdateConfig();
 			
 			g_bAddMessage = false;
+			DisposeObject(message);
 			return;
 		}
 		if(strcmp(sMessageID, g_sMessageID) != 0 && sMessageID[0] && g_bPrimary)
@@ -714,7 +721,7 @@ public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMes
 			g_smDeleteMessage.SetValue(sMessageID, iTime+TIMEOUT_TIME);
 			g_hDeleteMessage.PushString(sMessageID);
 		}
-		//json_cleanup_and_delete(message);
+		DisposeObject(message);
 		return;
 	}
 	
@@ -732,7 +739,7 @@ public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMes
 
 	user.GetDiscriminator(sDiscriminator, MAX_DISCORD_DISCRIMINATOR_LENGTH);
 	
-	//json_cleanup_and_delete(message);
+	DisposeObject(message);
 	
 	int count = ExplodeString(szMessage, " ", sValue, 2, 64);
 	TrimString(sValue[1]);
@@ -965,7 +972,7 @@ public void OnUnnecessaryMessagesReceived(DiscordBot bot, DiscordMessageList mes
 	*/
 	
 	DUMain_Bot().DeleteMessagesBulk(g_sChannelID, messages);
-	//json_cleanup_and_delete(messages);
+	DisposeObject(messages);
 	
 	
 	ReplyToCommand(client, "[SM] Deleted upto 100 messages from %s channel", g_sChannelName);
