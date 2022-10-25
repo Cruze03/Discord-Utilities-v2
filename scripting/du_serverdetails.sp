@@ -17,7 +17,7 @@ ConVar g_hTimelimit, g_hMaxrounds;
 Handle g_hRepeater = null;
 char g_sMap[256], g_sServerName[128], g_sChannelID[64], g_sMessageID[64];
 bool g_bGameStart = false;
-int g_iRoundStart;
+int g_iRoundStart, g_iFreezetime;
 
 bool g_bAddMessage = false, g_bLate = false;
 
@@ -26,7 +26,7 @@ public Plugin myinfo =
 	name = "[Discord Utilities v2] Server Details",
 	author = "Cruze",
 	description = "Updates a detailed embed about server every X seconds.",
-	version = "1.0",
+	version = DU_VERSION,
 	url = "https://github.com/Cruze03"
 };
 
@@ -38,6 +38,7 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 
 public void OnPluginStart()
 {
+	HookEvent("round_start", Event_Round);
 	HookEvent("round_freeze_end", Event_Round);
 	HookEvent("round_end", Event_Round);
 	
@@ -76,7 +77,7 @@ public Action Command_Refresh(int client, int args)
 	}
 	if(strlen(g_sMessageID) < LEN_ID)
 	{
-		ReplyToCommand(client, "[SM] Message ID is empty in config file. Kindly fill that out first.");
+		ReplyToCommand(client, "[SM] Message ID is empty in config file. Let server fill it up first.");
 		return Plugin_Handled;
 	}
 	
@@ -120,6 +121,7 @@ public void OnChannelReceived(DiscordBot bot, DiscordChannel channel)
 		return;
 	}
 	
+	bot.StopListeningToChannel(channel);
 	bot.StartListeningToChannel(channel, OnMessageReceived);
 	
 	CreateTimer(5.0, Timer_AddMessage);
@@ -144,10 +146,8 @@ public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMes
 		
 		g_bAddMessage = false;
 		bot.StopListeningToChannel(channel);
-		json_cleanup_and_delete(channel);
-		return;
 	}
-	json_cleanup_and_delete(message);
+	DisposeObject(message);
 }
 
 void AddMessage()
@@ -184,7 +184,8 @@ void AddMessage()
 	message.Embed(embed);
 	
 	DUMain_Bot().SendMessageToChannelID(g_sChannelID, message);
-	json_cleanup_and_delete(message);
+	
+	DisposeObject(message);
 	
 	g_bAddMessage = true;
 	
@@ -199,6 +200,7 @@ public void OnAutoConfigsBuffered()
 public Action Timer_OnAutoConfigsBuffered(Handle timer)
 {
 	FindConVar("hostname").GetString(g_sServerName, sizeof(g_sServerName));
+	g_iFreezetime = FindConVar("mp_freezetime").IntValue;
 }
 
 public int OnSettingsChanged(ConVar cvar, const char[] oldVal, const char[] newVal)
@@ -208,7 +210,12 @@ public int OnSettingsChanged(ConVar cvar, const char[] oldVal, const char[] newV
 
 public void Event_Round(Event ev, const char[] name, bool dbc)
 {
-	if(strcmp(name, "round_freeze_end", false) == 0)
+	if(strcmp(name, "round_start", false) == 0 && g_iFreezetime < 1)
+	{
+		g_bGameStart = true;
+		g_iRoundStart = GetTime()+1;
+	}
+	else if(strcmp(name, "round_freeze_end", false) == 0)
 	{
 		g_bGameStart = true;
 		g_iRoundStart = GetTime()+1;
@@ -357,8 +364,7 @@ public void UpdateScores()
 	message.Embed(embed);
 	DUMain_Bot().EditMessageID(g_sChannelID, g_sMessageID, message);
 	
-	//json_cleanup_and_delete(embed);
-	json_cleanup_and_delete(message);
+	DisposeObject(message);
 }
 
 bool GetRoundsLeft(int &round)
