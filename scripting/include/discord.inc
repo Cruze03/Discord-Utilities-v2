@@ -5,6 +5,8 @@
 
 #pragma dynamic 32768;
 
+native int DiscordAPI_Version();	// removes '.' from PLUGIN_VERSION and returns it as int.
+
 #include <json>
 #include <DateTime>
 
