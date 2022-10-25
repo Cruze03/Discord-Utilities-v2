@@ -1,10 +1,6 @@
 #include <sourcemod>
 #include <multicolors>
 
-#undef REQUIRE_PLUGIN
-#include <basecomm>
-#define REQUIRE_PLUGIN
-
 #include <discord>
 #include <du2>
 
