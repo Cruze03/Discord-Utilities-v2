@@ -5,7 +5,7 @@
 
 StringMap g_smParser;
 SMCParser g_hParser;
-char g_sSection[64], g_sBotToken[256], g_sGuildID[64], g_sRole[64], g_sInviteLink[64], g_sCommand[64], g_sCommandInGame[64], g_sDatabaseName[64], g_sBlockedCommands[512], g_sTableName[64], g_sAPIKey[128], g_sChat_Webhook[256];
+char g_sSection[64], g_sBotToken[256], g_sGuildID[64], g_sRole[64], g_sInviteLink[64], g_sCommand[64], g_sCommandInGame[64], g_sDatabaseName[64], g_sBlockedCommands[512], g_sTableName[64], g_sAPIKey[128], g_sChat_Webhook[256], g_sBugReport_Webhook[256], g_sCallAdmin_Webhook[256], g_sBans_Webhook[256], g_sComms_Webhook[256], g_sReportPlayer_Webhook[256];
 char g_sMap_ChannelID[64], g_sChat_ChannelID[64], g_sVerification_ChannelID[64];
 char g_sMap_MessageID[64], g_sVerification_MessageID[64];
 
@@ -21,7 +21,7 @@ public Plugin myinfo =
 	name = "Discord Utilities v2",
 	author = "Cruze",
 	description = "Parser just for Discord Utilities v2 because 'CSGO'.",
-	version = "1.0",
+	version = DU_VERSION,
 	url = "https://github.com/Cruze03"
 };
 
@@ -278,6 +278,26 @@ public SMCResult Config_KeyValue(SMCParser smc, const char[] key, const char[] v
 		{
 			strcopy(g_sChat_Webhook, 256, value);
 		}
+		else if(!strcmp(key, "bugreport"))
+		{
+			strcopy(g_sBugReport_Webhook, 256, value);
+		}
+		else if(!strcmp(key, "calladmin"))
+		{
+			strcopy(g_sCallAdmin_Webhook, 256, value);
+		}
+		else if(!strcmp(key, "bans"))
+		{
+			strcopy(g_sBans_Webhook, 256, value);
+		}
+		else if(!strcmp(key, "comms"))
+		{
+			strcopy(g_sComms_Webhook, 256, value);
+		}
+		else if(!strcmp(key, "reportplayer"))
+		{
+			strcopy(g_sReportPlayer_Webhook, 256, value);
+		}
 	}
 	else if(!strcmp(g_sSection, "VERIFICATION_SETTINGS"))
 	{
@@ -344,6 +364,11 @@ public void Config_End(SMCParser smc, bool halted, bool failed)
 	g_smParser.SetString("message_map", g_sMap_MessageID);
 	g_smParser.SetString("message_verification", g_sVerification_MessageID);
 	g_smParser.SetString("webhook_chat", g_sChat_Webhook);
+	g_smParser.SetString("webhook_bugreport", g_sBugReport_Webhook);
+	g_smParser.SetString("webhook_calladmin", g_sCallAdmin_Webhook);
+	g_smParser.SetString("webhook_bans", g_sBans_Webhook);
+	g_smParser.SetString("webhook_comms", g_sComms_Webhook);
+	g_smParser.SetString("webhook_report", g_sReportPlayer_Webhook);
 	
 	char value[8];
 	IntToString(g_bPrimary, value, 8);
@@ -360,7 +385,7 @@ public void Config_End(SMCParser smc, bool halted, bool failed)
 	g_smParser.SetString("database_name", g_sDatabaseName);
 	g_smParser.SetString("table_name", g_sTableName);
 	
-	if(g_eBot == INVALID_HANDLE && strlen(g_sBotToken) > LEN_ID)
+	if(strlen(g_sBotToken) > LEN_ID)
 	{
 		g_eBot = new DiscordBot(g_sBotToken);
 	}
@@ -369,4 +394,12 @@ public void Config_End(SMCParser smc, bool halted, bool failed)
 	
 	Call_StartForward(g_hOnConfigLoaded);
 	Call_Finish();
+}
+
+public void OnPluginEnd()
+{
+	if(g_eBot != null)
+	{
+		DisposeObject(g_eBot);
+	}
 }
