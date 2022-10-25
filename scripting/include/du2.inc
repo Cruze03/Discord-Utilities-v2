@@ -3,7 +3,7 @@
 #endif
 #define _discord_utilities_v2_included
 
-#define DU_VERSION "1.0.3"
+#define DU_VERSION "1.0.2"
 
 const int LEN_ID = 10;				// Channel ID length less than this value is considered invalid
 const int MAX_COMMANDS = 64;		// Max commands possible in "VERIFICATION_SETTINGS" > "blocked_commands"
