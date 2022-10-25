@@ -21,7 +21,7 @@ public Plugin myinfo =
 	name = "[Discord Utilities v2] Chat Relay",
 	author = "Cruze",
 	description = "Discord => In-Game and vice-versa relay",
-	version = "1.0",
+	version = DU_VERSION,
 	url = "https://github.com/Cruze03"
 };
 
@@ -103,13 +103,17 @@ public void OnChannelReceived(DiscordBot bot, DiscordChannel channel)
 		return;
 	}
 
+	bot.StopListeningToChannel(channel);
 	bot.StartListeningToChannel(channel, OnMessageReceived);
 }
 
 public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMessage message)
 {
 	if(message.Author.IsBot)
+	{
+		DisposeObject(message);
 		return;
+	}
 
 	DiscordUser user = message.GetAuthor();
 
@@ -121,10 +125,10 @@ public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMes
 
 	char szDiscriminator[MAX_DISCORD_DISCRIMINATOR_LENGTH];
 	user.GetDiscriminator(szDiscriminator, sizeof(szDiscriminator));
+	
+	DisposeObject(message);
 
 	PrintToChatAll(" \x06» \x03%s#%s\x01: \x04%s", szUsername, szDiscriminator, szMessage);
-	
-	json_cleanup_and_delete(message);
 }
 
 public void OnClientPostAdminCheck(int client)
@@ -168,7 +172,7 @@ public int OnTransferCompleted(Handle hRequest, bool bFailure, bool bRequestSucc
 	int iBodyLength;
 	SteamWorks_GetHTTPResponseBodySize(hRequest, iBodyLength);
 
-	char[] sData = new char[iBodyLength];
+	char[] sData = new char[iBodyLength+1];
 	SteamWorks_GetHTTPResponseBodyData(hRequest, sData, iBodyLength);
 
 	delete hRequest;
@@ -250,25 +254,8 @@ void SendChatRelay(int client, const char[] sArgs)
 	hook.SetContent(sContent);
 	
 	hook.Send();
-	json_cleanup_and_delete(hook);
-}
-
-void Discord_EscapeString(char[] string, int maxlen, bool name = false)
-{
-	if(name)
-	{
-		ReplaceString(string, maxlen, "everyone", "everyonｅ");
-		ReplaceString(string, maxlen, "here", "herｅ");
-		ReplaceString(string, maxlen, "discordtag", "dｉscordtag");
-	}
-	ReplaceString(string, maxlen, "#", "＃");
-	ReplaceString(string, maxlen, "@", "＠");
-	//ReplaceString(string, maxlen, ":", "");
-	ReplaceString(string, maxlen, "_", "ˍ");
-	ReplaceString(string, maxlen, "'", "＇");
-	ReplaceString(string, maxlen, "`", "＇");
-	ReplaceString(string, maxlen, "~", "∽");
-	ReplaceString(string, maxlen, "\"", "＂");
+	
+	DisposeObject(hook);
 }
 
 public bool ReadCoreCFG()
