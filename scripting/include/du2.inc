@@ -3,8 +3,10 @@
 #endif
 #define _discord_utilities_v2_included
 
-const int LEN_ID = 10;
-const int MAX_COMMANDS = 64;
+#define DU_VERSION "1.0.3"
+
+const int LEN_ID = 10;				// Channel ID length less than this value is considered invalid
+const int MAX_COMMANDS = 64;		// Max commands possible in "VERIFICATION_SETTINGS" > "blocked_commands"
 
 //du_main
 native void DUMain_UpdateConfig();
@@ -26,6 +28,30 @@ forward void DUVerification_OnLinkedAccount(int client, char[] sUserID, char[] s
 forward void DUVerification_OnAccountRevoked(int client, char[] sUserID);
 forward void DUVerification_OnClientLoaded(int client);
 forward Action DUVerification_OnBlockedCommandUse(int client, char[] sCommand);
+
+
+stock void Discord_EscapeString(char[] string, int maxlen, bool name = false)
+{
+	if(name)
+	{
+		ReplaceString(string, maxlen, "everyone", "everyonｅ");
+		ReplaceString(string, maxlen, "here", "herｅ");
+		ReplaceString(string, maxlen, "discordtag", "dｉscordtag");
+	}
+	ReplaceString(string, maxlen, "#", "＃");
+	ReplaceString(string, maxlen, "@", "＠");
+	//ReplaceString(string, maxlen, ":", "");
+	ReplaceString(string, maxlen, "_", "ˍ");
+	ReplaceString(string, maxlen, "'", "＇");
+	ReplaceString(string, maxlen, "`", "＇");
+	ReplaceString(string, maxlen, "~", "∽");
+	ReplaceString(string, maxlen, "\"", "＂");
+}
+
+public void DisposeObject(JSON_Object &obj)
+{
+	json_cleanup_and_delete(obj);
+}
 
 public SharedPlugin __pl_discord_utilities_v2 =
 {
