@@ -123,6 +123,15 @@ public int Native_SetString(Handle plugin, int numParams)
 public void OnPluginStart()
 {
 	RegAdminCmd("sm_du_refresh", Command_Refresh, ADMFLAG_ROOT);
+	
+	if(GetFeatureStatus(FeatureType_Native, "DiscordAPI_Version") != FeatureStatus_Available)
+	{
+		SetFailState("[DU-Main] You are running an older version of discord api. Please update to the latest version.");
+	}
+	if(DiscordAPI_Version() < 102)
+	{
+		SetFailState("[DU-Main] You are running an older version of discord api. Please update to the latest version.");
+	}
 }
 
 public Action Command_Refresh(int client, int args)
