@@ -66,16 +66,4 @@ methodmap DiscordEmbedAuthor < JSON_Object
 	{
 		this.SetString("icon_url", iconUrl);
 	}
-
-	/**
-	* Release resources
-	*/
-	public void Dispose()
-	{
-		if(this == null)
-			return;
-
-		this.Cleanup();
-		delete this;
-	}
 }

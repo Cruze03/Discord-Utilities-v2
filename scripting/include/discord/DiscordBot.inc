@@ -280,18 +280,6 @@ methodmap DiscordBot < JSON_Object
 	}
 
 	/**
-	* Release resources
-	*/
-	public void Dispose()
-	{
-		if(this == null)
-			return;
-
-		this.Cleanup();
-		delete this;
-	}
-
-	/**
 	* Create a new guild.
 	* Fires a Guild Create Gateway event.
 	* This endpoint can be used only by bots in less than 10 guilds.

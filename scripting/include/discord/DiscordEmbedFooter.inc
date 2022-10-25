@@ -62,16 +62,4 @@ methodmap DiscordEmbedFooter < JSON_Object
 	{
 		this.SetString("proxy_icon_url", iconUrl);
 	}
-
-	/**
-	* Release resources
-	*/
-	public void Dispose()
-	{
-		if(this == null)
-			return;
-
-		this.Cleanup();
-		delete this;
-	}
 }

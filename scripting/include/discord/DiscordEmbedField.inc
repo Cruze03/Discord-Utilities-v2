@@ -60,16 +60,4 @@ methodmap DiscordEmbedField < JSON_Object
 	{
 		this.SetString("value", value);
 	}
-
-	/**
-	* Release resources
-	*/
-	public void Dispose()
-	{
-		if(this == null)
-			return;
-
-		this.Cleanup();
-		delete this;
-	}
 }

@@ -128,16 +128,4 @@ methodmap DiscordGuildUser < JSON_Object
 	{
 		return view_as<DiscordRoleList>(this.GetObject("roles"));
 	}
-
-	/**
-	* Release resources
-	*/
-	public void Dispose()
-	{
-		if(this == null)
-			return;
-
-		this.Cleanup();
-		delete this;
-	}
 }

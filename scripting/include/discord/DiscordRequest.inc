@@ -63,6 +63,11 @@ methodmap DiscordRequest < Handle
 	{
 		SteamWorks_SetHTTPRequestContextValue(this, data1, data2);
 	}
+	
+	public void SetContextData(any data1 = 0, const char[] route)
+	{
+		SteamWorks_SetHTTPRequestContextValue(this, data1, UrlToDP(route));
+	}
 
 	public void SetBot(DiscordBot __bot)
 	{
@@ -77,4 +82,10 @@ methodmap DiscordRequest < Handle
 	{
 		return SteamWorks_SendHTTPRequest(this);
 	}
+}
+
+public Handle UrlToDP(const char[] url) {
+	DataPack dp = new DataPack();
+	WritePackString(dp, url);
+	return view_as<Handle>(dp);
 }

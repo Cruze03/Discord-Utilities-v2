@@ -239,18 +239,6 @@ methodmap ThreadMetaData < JSON_Object
 	{
 		return this.GetString("archive_timestamp", output, maxsize);
 	}
-
-	/**
-	*	Release resources
-	*/
-	public void Dispose()
-	{
-		if(this == null)
-			return;
-
-		this.Cleanup();
-		delete this;
-	}
 }
 
 /**

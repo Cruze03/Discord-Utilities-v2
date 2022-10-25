@@ -63,16 +63,4 @@ methodmap DiscordEmbedVideo < JSON_Object
 	{
 		this.SetString("proxy_url", url);
 	}
-
-	/**
-	* Release resources
-	*/
-	public void Dispose()
-	{
-		if(this == null)
-			return;
-
-		this.Cleanup();
-		delete this;
-	}
 }

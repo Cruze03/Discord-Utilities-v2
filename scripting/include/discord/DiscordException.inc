@@ -7,10 +7,11 @@ methodmap DiscordException __nullable__ /* < Exception */
 {
 	public DiscordException(const char[] error, any ...)
 	{
-		char buffer[1024];
+		char buffer[1024], sPath[256];
+		BuildPath(Path_SM, sPath, 256, "logs/discordapi_errors.log");
 		SetGlobalTransTarget(LANG_SERVER);
 		VFormat(buffer, sizeof(buffer), error, 2);
-		LogError("Discord Exception: %s", buffer);
+		LogToFile(sPath, "Discord Exception: %s", buffer);
 		return view_as<DiscordException>(1);	// To avoid SM 1.11 compile error.
 	}
 }

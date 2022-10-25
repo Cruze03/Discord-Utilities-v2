@@ -335,18 +335,6 @@ methodmap DiscordEmbed < JSON_Object
 		public get() { return this.GetProvider(); }
 		public set(DiscordEmbedProvider value) { this.WithProvider(value); }
 	}
-
-	/**
-	* Release resources
-	*/
-	public void Dispose()
-	{
-		if(this == null)
-			return;
-
-		this.Cleanup();
-		delete this;
-	}
 }
 
 public int HexToDec(const char[] hex)

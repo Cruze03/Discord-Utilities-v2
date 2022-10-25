@@ -23,16 +23,4 @@ methodmap DiscordActivity < JSON_Object
 		obj.SetInt("type", view_as<int>(type));
 		return view_as<DiscordActivity>(obj);
 	}
-
-	/**
-	* Release resources
-	*/
-	public void Dispose()
-	{
-		if(this == null)
-			return;
-
-		this.Cleanup();
-		delete this;
-	}
 }

@@ -99,16 +99,4 @@ methodmap DiscordWebHook < JSON_Object
 		request.SetJsonBody(this);
 		request.Send();
 	}
-
-	/**
-	* Release resources
-	*/
-	public void Dispose()
-	{
-		if(this == null)
-			return;
-
-		this.Cleanup();
-		delete this;
-	}
 }

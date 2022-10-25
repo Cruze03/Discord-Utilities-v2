@@ -5,17 +5,6 @@
 
 methodmap DiscordTypeExtension < JSON_Array
 {
-	/**
-	* Release resources
-	*/
-	public void Dispose()
-	{
-		if(this == null)
-			return;
-
-		this.Cleanup();
-		delete this;
-	}
 }
 
 methodmap DiscordRoleList < DiscordTypeExtension { }
