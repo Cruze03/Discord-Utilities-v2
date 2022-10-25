@@ -22,6 +22,11 @@
 	"WEBHOOKS"
 	{
 		"chat"				""
+		"bugreport"			""
+		"calladmin" 			""
+		"bans"				""
+		"comms"				""
+		"reportplayer"			""
 	}
 	"VERIFICATION_SETTINGS"
 	{
