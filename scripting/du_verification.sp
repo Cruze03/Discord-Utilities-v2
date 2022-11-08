@@ -83,7 +83,7 @@ public Plugin myinfo =
 public void OnPluginStart()
 {
 	RegAdminCmd("sm_vr_deleteaccount", Command_DeleteAccount, ADMFLAG_ROOT, "Deletes steamid from discord utilities database.");
-	//RegAdminCmd("sm_vr_deletemessages", Command_DeleteMessages, ADMFLAG_ROOT);
+	RegAdminCmd("sm_vr_deletemessages", Command_DeleteMessages, ADMFLAG_ROOT);
 	
 	LoadTranslations("du_verification.phrases");
 	
@@ -223,7 +223,7 @@ public Action Command_DeleteMessages(int client, int args)
 	}
 	if(!strcmp(g_sMessageID, ""))
 	{
-		ReplyToCommand(client, "[SM] Message ID is empty in config file. Kindly fill that out first.");
+		ReplyToCommand(client, "[SM] Message ID is empty in config file. Kindly let the plugin fill that out first.");
 		return Plugin_Handled;
 	}
 	
@@ -682,8 +682,7 @@ public void OnChannelReceived(DiscordBot bot, DiscordChannel channel)
 	g_sChannelName[0] = '#';
 	channel.GetName(g_sChannelName[1], 64);
 	
-	bot.StopListeningToChannel(channel);
-	bot.StartListeningToChannel(channel, OnMessageReceived);
+	DUMain_Bot().StartListeningToChannel(channel, OnMessageReceived);
 	
 	CreateTimer(5.0, Timer_AddMessage);
 }
@@ -693,7 +692,7 @@ public Action Timer_AddMessage(Handle timer)
 	AddMessage();
 }
 
-public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMessage message) /*Find whether not deleting `message` is causing memory leak*/
+public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMessage message)
 {
 	char sMessageID[64];
 	message.GetID(sMessageID, 64);
@@ -748,7 +747,7 @@ public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMes
 		{
 			Format(sReply, 256, "%T", "DiscordInfo", LANG_SERVER, sUserID, g_sCommand);
 			SendMessageToChannel(channel, sReply);
-			bot.DeleteMessageID(g_sChannelID, sMessageID);
+			DUMain_Bot().DeleteMessageID(g_sChannelID, sMessageID);
 		}
 		return;
 	}
@@ -759,7 +758,7 @@ public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMes
 		{
 			Format(sReply, 256, "%T", "DiscordMissingParameters", LANG_SERVER, sUserID);
 			SendMessageToChannel(channel, sReply);
-			bot.DeleteMessageID(g_sChannelID, sMessageID);
+			DUMain_Bot().DeleteMessageID(g_sChannelID, sMessageID);
 		}
 		return;
 	}
@@ -769,7 +768,7 @@ public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMes
 		{
 			Format(sReply, 256, "%T", "DiscordInvalidID", LANG_SERVER, sUserID, g_sCommandInGame);
 			SendMessageToChannel(channel, sReply);
-			bot.DeleteMessageID(g_sChannelID, sMessageID);
+			DUMain_Bot().DeleteMessageID(g_sChannelID, sMessageID);
 		}
 		return;
 	}
@@ -786,14 +785,14 @@ public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMes
 	{
 		Format(sReply, 256, "%T", "DiscordInvalid", LANG_SERVER, sUserID);
 		SendMessageToChannel(channel, sReply);
-		bot.DeleteMessageID(g_sChannelID, sMessageID);
+		DUMain_Bot().DeleteMessageID(g_sChannelID, sMessageID);
 		return;
 	}
 	if(g_bMember[client])
 	{
 		Format(sReply, 256, "%T", "DiscordAlreadyLinked", LANG_SERVER, sUserID);
 		SendMessageToChannel(channel, sReply);
-		bot.DeleteMessageID(g_sChannelID, sMessageID);
+		DUMain_Bot().DeleteMessageID(g_sChannelID, sMessageID);
 		return;
 	}
 
@@ -818,7 +817,7 @@ public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMes
 	
 	Format(sReply, 512, "%T", "DiscordPleaseWait", LANG_SERVER, sUserID);
 	SendMessageToChannel(channel, sReply);
-	bot.DeleteMessageID(g_sChannelID, sMessageID);
+	DUMain_Bot().DeleteMessageID(g_sChannelID, sMessageID);
 }
 
 stock int GetClientFromUniqueCode(const char[] unique)
@@ -945,27 +944,6 @@ public void OnUnnecessaryMessagesReceived(DiscordBot bot, DiscordMessageList mes
 		ReplyToCommand(client, "[SM] Less than 2 messages cannot be deleted. Delete it manually.");
 		return;
 	}
-
-	/*
-	char messageid[64];
-	ArrayList arr = new ArrayList(ByteCountToCells(64));
-	for(int i = 0; i < count; i++)
-	{
-		DiscordMessage message = view_as<DiscordMessage>(messages.GetObject(i));
-		message.GetID(messageid, 64);
-		
-		if(arr.FindString(messageid) == -1)
-		{
-			arr.PushString(messageid);
-		}
-		else
-		{
-			messages.Remove(i);
-		}
-	}
-	
-	delete arr;
-	*/
 	
 	DUMain_Bot().DeleteMessagesBulk(g_sChannelID, messages);
 	DisposeObject(messages);
