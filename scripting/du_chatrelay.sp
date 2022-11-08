@@ -103,8 +103,7 @@ public void OnChannelReceived(DiscordBot bot, DiscordChannel channel)
 		return;
 	}
 
-	bot.StopListeningToChannel(channel);
-	bot.StartListeningToChannel(channel, OnMessageReceived);
+	DUMain_Bot().StartListeningToChannel(channel, OnMessageReceived);
 }
 
 public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMessage message)
