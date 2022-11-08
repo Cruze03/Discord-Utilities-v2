@@ -121,8 +121,7 @@ public void OnChannelReceived(DiscordBot bot, DiscordChannel channel)
 		return;
 	}
 	
-	bot.StopListeningToChannel(channel);
-	bot.StartListeningToChannel(channel, OnMessageReceived);
+	DUMain_Bot().StartListeningToChannel(channel, OnMessageReceived);
 	
 	CreateTimer(5.0, Timer_AddMessage);
 }
@@ -145,7 +144,7 @@ public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMes
 		DUMain_UpdateConfig();
 		
 		g_bAddMessage = false;
-		bot.StopListeningToChannel(channel);
+		DUMain_Bot().StopListeningToChannel(channel);
 	}
 	DisposeObject(message);
 }
