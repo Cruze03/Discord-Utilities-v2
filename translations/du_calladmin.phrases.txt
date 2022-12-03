@@ -1,0 +1,35 @@
+"Phrases"
+{
+	"HandleEmbedTitle"
+	{
+		"en"		"A report is being handled by an Admin"
+	}
+	"Handler"
+	{
+		"en"		"Handler:"
+	}
+	"ReportID"
+	{
+		"en"		"Report ID:"
+	}
+	"ReportMessageTitle"
+	{
+		"en"		"When in-game type !calladmin_handle <ReportID> in chat to handle this report."
+	}
+	"ReportEmbedTitle"
+	{
+		"en"		"New Report"
+	}
+	"Reporter"
+	{
+		"en"		"Reporter:"
+	}
+	"Target"
+	{
+		"en"		"Target:"
+	}
+	"Reason"
+	{
+		"en"		"Reason:"
+	}
+}

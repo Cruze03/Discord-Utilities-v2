@@ -1,0 +1,64 @@
+"Phrases"
+{
+	"MuteEmbedTitle"
+	{
+		"en"		"New Player Comm-Banned!"
+	}
+	"TimeInMinutes"
+	{
+		"#format"	"{1:i}"
+		"en"		"{1} minute(s)"
+	}
+	"MUTE"
+	{
+		"en"		"MUTE"
+	}
+	"GAG"
+	{
+		"en"		"GAG"
+	}
+	"SILENCE"
+	{
+		"en"		"SILENCE"
+	}
+	"Admin"
+	{
+		"en"		"Admin:"
+	}
+	"Player"
+	{
+		"en"		"Player:"
+	}
+	"Length"
+	{
+		"en"		"Length:"
+	}
+	"Type"
+	{
+		"en"		"Type:"
+	}
+	"Reason"
+	{
+		"en"		"Reason:"
+	}
+	"BanEmbedTitle"
+	{
+		"en"		"New Player Server Banned!"
+	}
+	"ReportEmbedTitle"
+	{
+		"en"		"New Report"
+	}
+	"Reporter"
+	{
+		"en"		"Reporter:"
+	}
+	"Target"
+	{
+		"en"		"Target:"
+	}
+	"Reason"
+	{
+		"en"		"Reason:"
+	}
+}

@@ -1,0 +1,19 @@
+"Phrases"
+{
+	"EmbedTitle"
+	{
+		"en"			"New Report"
+	}
+	"Reporter"
+	{
+		"en"			"Reporter:"
+	}
+	"Map"
+	{
+		"en"			"Map:"
+	}
+	"Reason"
+	{
+		"en"			"Reason:"
+	}
+}
