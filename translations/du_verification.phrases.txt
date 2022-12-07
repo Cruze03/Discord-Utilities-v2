@@ -3,15 +3,18 @@
 	"ServerPrefix"
 	{
 		"en"		"{green}[DU]{default}"
+		"lv"		"{green}[DU]{default}"
 	}
 	"DiscordVerificationInfoTitle"
 	{
 		"en"		"Verification Channel"
+		"lv"		"Verifikācijas Kanāls"
 	}
 	"DiscordVerificationInfo"
 	{
 		"#format"	"{1:s}"
 		"en"		"**What to do:**\n \n**-** Join one of our server by going to **#servers** channel and type **{1}** in chat\n**-** Copy the verification code as show in the image below.\n**-** Paste it here and **be patient**"
+		"lv"		"**Ko darīt:**\n \n**-** Pievienojies vienam no mūsu serveriem **#servers** un raksti **{1}** čatā\n**-** Nokopē verifikācijas kodu kā tas ir parādīts bildē.\n**-** Iekopē to šeit čatā un **gaidi**"
 	}
 	"DiscordVerified"
 	{
@@ -33,7 +36,7 @@
 		"hu"		"<@{1}> Sikeresen megerősítetted a fiókodat! ✅"
 		"fr"		"<@{1}> Vous avez lié votre compte! ✅"
 		"nl"		"<@{1}> Je hebt je account gekoppeld! ✅"
-		"lv"		"<@{1}> Tu savienoji savu profilu! ✅"
+		"lv"		"<@{1}> Jūs savienojāt savu profilu! ✅"
 		"ru"		"<@{1}> Вы связали свой аккаунт! ✅"
 		"ro"		"<@{1}> Ti-a asociat contul cu succes! ✅"
 	}
@@ -53,15 +56,18 @@
 	{
 		"#format"	"{1:s}"
 		"en"		"<@{1}> Please wait while we confirm your verification code. ⏳\n \n**Note:**\n**-** Do not spam in this period because this may get BOT rate limited. \n**-** Your verification code has been changed for security purposes. Kindly type !verify in-game again **if BOT fails to verify**.\n \n \n"
+		"lv"		"<@{1}> Uzgaidi kamēr mēs apstiprinam tavu verifikācijas kodu. ⏳\n \n**Ņem vērā:**\n**-** Nespamo savādāk Discord Bots tiks rate limited. \n**-** Tavs kods tika mainīts drošības iemeslu dēļ. Raksti !verify spēlē atkal **Ja Bots nespēj verificēt kodu**.\n \n \n"
 	}
 	"DiscordNoRowFound"
 	{
 		"#format"	"{1:s}"
 		"en"		"<@{1}> We are unable to find details of you in our database. Kindly contact the admins for the same."
+		"lv"		"<@{1}> Mēs nevaram atrast tavus datus datubāzē. Sazinies ar adminstrātoru."
 	}
 	"DiscordAlreadyMember"
 	{
 		"en"		"You've already linked your discord!"
+		"lv"		"Tu jau savienoji savu discord profilu ar serveri!"
 	}
 	"DiscordInfo"
 	{
@@ -71,7 +77,7 @@
 		"hu"		"<@{1}> Ezt a szobát a fiókok megerősítésére használjuk!\nHasználat: {2} <azonosítód>"
 		"fr"		"<@{1}> Ce canal est utilisé pour la liason de compte!\nUtilisation: {2} <code de vérification>"
 		"nl"		"<@{1}> Dit kanaal wordt gebruikt om je account te koppelen!\nGebruik: {2} <verificatie code>"
-		"lv"		"<@{1}> Šis kanāls tiek lietots profilu savienošanas!\nPielietojums: {2} <verifikācijas kods>"
+		"lv"		"<@{1}> Šis kanāls tiek lietots profilu savienošanai!\nPielietojums: {2} <verifikācijas kods>"
 		"ru"		"<@{1}> Этот канал используется для привязки аккаунта!\nИспользование: {2} <код подтверждения>"
 		"ro"		"<@{1}> Acest canal este folosit pentru a-ți verifica contul!\nFolosește: {2} <cod de verificare>"
 	}
@@ -114,8 +120,9 @@
 	"TryAgainLater"
 	{
 		"en"		"Please wait. Your member status hasn't been fetched yet."
-		"pt"		"Por favor, aguarde. Seu status de membro ainda não foi obtido."
 		"hu"		"Kérlek várj egy picit! A tagságod még lekérés alatt."
+		"lv"		"Lūdzu uzgaidi. Tavs discord member status vēl nav apstrādāts."
+		"pt"		"Por favor, aguarde. Seu status de membro ainda não foi obtido."
 	}
 	"MustVerify"
 	{
@@ -125,32 +132,36 @@
 		"hu"		"Meg kell erősítened a {lightblue}Discord {default}fiókodat! Írd be, hogy {orange}{1}"
 		"fr"		"Vous devez vérifier votre {lightblue}Discord {default}account! Ecrit {orange}{1}"
 		"nl"		"Je moet je {lightblue}Discord {default}account verifieren! Type {orange}{1}"
-		"lv"		"Verificē savu {lightblue}Discord {default}profilu! Raksti {orange}{1}"
+		"lv"		"Jums vajag verificēt savu {lightblue}Discord {default}profilu! Raksti {orange}{1}"
 		"ru"		"Вы должны подтвердить свой {lightblue}Discord {default}учетная запись! Тип {orange}{1}"
 		"ro"		"Trebuie să îti asociezi Discord-ul tău! Tastează {orange}{1}"
 	}
 	"LinkConnect"
 	{
 		"en"		"Join our discord server:"
-		"pt"		"Junte-se ao nosso servidor Discord:"
 		"hu"		"Csatlakozz a Discord szerverünkhöz:"
+		"lv"		"Pievienojies mūsu Discord serverim:"
+		"pt"		"Junte-se ao nosso servidor Discord:"
 	}
 	"LinkUsage"
 	{
 		"#format"	"{1:s},{2:s},{3:s}"
 		"en"		"Type {lime}{1} {2} {default}in {orange}{3}{default} channel"
-		"pt"		"Digite {lime}{1} {2} {default}no {orange}{3}"
 		"hu"		"Használd a {lime}{1} {2} {default}parancsot a {orange}{3} {default}szobában"
+		"en"		"Raksti {lime}{1} {2} {default}iekšā {orange}{3}{default} kanālā"
+		"pt"		"Digite {lime}{1} {2} {default}no {orange}{3}"
 	}
 	"CopyPasteFromConsole"
 	{
 		"en"		"You can also {lime}copy-paste{default} from {orange}console{default} :)"
-		"pt"		"Você também pode {lime}copiar e colar {default}do console {orange}{default} :)"
 		"hu"		"Ki is {lime}másolhatod {default}a {orange}konzolból{default} :)"
+		"lv"		"Jūs varat kopēt arī ziņu {lime}copy-paste{default} no {orange}konsoles{default} :)"
+		"pt"		"Você também pode {lime}copiar e colar {default}do console {orange}{default} :)"
 	}
 	"DiscordRevoked"
 	{
 		"en"		"You are no longer in our discord server therefore your discord member status has been revoked!"
+		"lv"		"Jūs vairāk neesat mūsu discord serverī. Jūsu discord member statuss ir noņemts!"
 		"pt"		"Você não está mais em nosso servidor discord, portanto, seu status de membro discord foi revogado!"
 		"ro"        "Numai faci parte din server-ul nostru de discord, rolul tău de membru a fost sters!"
 	}
