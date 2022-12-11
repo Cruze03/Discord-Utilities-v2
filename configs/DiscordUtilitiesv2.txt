@@ -2,43 +2,50 @@
 {
 	"BOT_TOKEN"
 	{
-		"key"				""
+		"key"		""
 	}
 	"API_KEY"
 	{
-		"key"				""
+		"key"		""
 	}
 	"CHANNEL_IDS"
 	{
-		"map"				""
-		"chat"				""
+		"map"		""
+		"chat"		""
 		"verification"		""
 	}
 	"MESSAGE_IDS"
 	{
-		"map"				""
+		"map"		""
 		"verification"		""
 	}
 	"WEBHOOKS"
 	{
-		"chat"				""
-		"bugreport"			""
-		"calladmin" 			""
-		"bans"				""
-		"comms"				""
-		"reportplayer"			""
+		"chat"		""
+		"bugreport"		""
+		"calladmin"		""
+		"bans"		""
+		"comms"		""
+		"reportplayer"		""
+	}
+	"WEBHOOK_SETTINGS"
+	{
+		"map_thumnail"		"https://image.gametracker.com/images/maps/160x120/csgo/{MAPNAME}.jpg"
+		"server_dns_name"		"MYCUSTOMDNS"
 	}
 	"VERIFICATION_SETTINGS"
 	{
-		"primary"			"1"
-		"serverid"			"1"
-		"guildid"			""
-		"roleid"			""
-		"invite_link"		"https://discord.gg/ufKszVQPTK"
-		"command"			"!link"
-		"command_ingame"	"sm_verify"
-		"blocked_commands"	"sm_ws, sm_knife, sm_store"
+		"primary"		"1"
+		"serverid"		"1"
+		"guildid"		""
+		"roleid"		""
+		"invite_link"		"YOURDISCORDSERVERLINKHERE"
+		"command"		"!link, !verify, !connect"
+		"command_ingame"		"sm_verify, sm_viewid, sm_discordverify"
+		"blocked_commands"		"sm_ws, sm_knife, sm_store"
+		"use_swgm_for_blocked_commands"		"0"
 		"database_name"		"du"
 		"table_name"		"du_users"
+		"servers_table_name"	"du_servers"
 	}
 }
