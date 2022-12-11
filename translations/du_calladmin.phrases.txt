@@ -3,34 +3,42 @@
 	"HandleEmbedTitle"
 	{
 		"en"		"A report is being handled by an Admin"
+		"lv"		"Admins apstrādā sūdzību..."
 	}
 	"Handler"
 	{
 		"en"		"Handler:"
+		"lv"		"Apstrāda:"
 	}
 	"ReportID"
 	{
 		"en"		"Report ID:"
+		"lv"		"Ziņotāja ID:"
 	}
 	"ReportMessageTitle"
 	{
 		"en"		"When in-game type !calladmin_handle <ReportID> in chat to handle this report."
+		"lv"		"Kad esi spēlē raksti čatā !calladmin_handle <ZiņotājaID> lai apstrādātu sūdzību."
 	}
 	"ReportEmbedTitle"
 	{
 		"en"		"New Report"
+		"lv"		"Jauna Sūdzība"
 	}
 	"Reporter"
 	{
 		"en"		"Reporter:"
+		"lv"		"Ziņotājs:"
 	}
 	"Target"
 	{
 		"en"		"Target:"
+		"lv"		"Apsūdz:"
 	}
 	"Reason"
 	{
 		"en"		"Reason:"
+		"en"		"Iemesls:"
 	}
 	"DirectConnect"
 	{

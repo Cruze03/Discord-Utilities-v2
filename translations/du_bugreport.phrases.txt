@@ -3,18 +3,22 @@
 	"EmbedTitle"
 	{
 		"en"			"New Report"
+		"lv"			"Jauna Sūdzība/Ieteikums"
 	}
 	"Reporter"
 	{
 		"en"			"Reporter:"
+		"lv"			"Ziņotājs:"
 	}
 	"Map"
 	{
 		"en"			"Map:"
+		"lv"			"Karte:"
 	}
 	"Reason"
 	{
 		"en"			"Reason:"
+		"lv"			"Iemesls:"
 	}
 	"DirectConnect"
 	{
