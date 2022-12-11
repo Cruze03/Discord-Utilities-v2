@@ -3,6 +3,8 @@
 
 #undef REQUIRE_PLUGIN
 #include <basecomm>
+#include <sourcecomms>
+#include <materialadmin>
 #define REQUIRE_PLUGIN
 
 #include <discord>
@@ -14,7 +16,7 @@
 SMCParser g_hParser;
 char g_sPChatTrigger[16], g_sSChatTrigger[16];
 char g_sAPIKey[128], g_sChannelID[64], g_sWebhook[256], g_sAvatar[MAXPLAYERS+1][256];
-bool g_bBaseComm = false, g_bLate = false;
+bool g_bBaseComm = false, g_bSourceComm = false, g_bMaterialAdmin = false, g_bLate = false;
 
 public Plugin myinfo = 
 {
@@ -31,7 +33,6 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 	return APLRes_Success;
 }
 
-
 public void OnPluginStart()
 {
 	if(g_bLate)
@@ -47,6 +48,7 @@ public void OnPluginStart()
 				OnClientPostAdminCheck(i);
 			}
 		}
+		OnAllPluginsLoaded();
 		g_bLate = false;
 	}
 }
@@ -72,6 +74,8 @@ public void DUMain_OnConfigLoaded()
 public void OnAllPluginsLoaded()
 {
 	g_bBaseComm = LibraryExists("basecomm");
+	g_bSourceComm = LibraryExists("sourcecomms++");
+	g_bMaterialAdmin = LibraryExists("materialadmin");
 }
 
 public void OnLibraryAdded(const char[] name)
@@ -80,6 +84,14 @@ public void OnLibraryAdded(const char[] name)
 	{
 		g_bBaseComm = true;
 	}
+	else if(!strcmp(name, "sourcecomms++", false))
+	{
+		g_bSourceComm = true;
+	}
+	else if(!strcmp(name, "materialadmin", false))
+	{
+		g_bMaterialAdmin = true;
+	}
 }
 
 public void OnLibraryRemoved(const char[] name)
@@ -87,6 +99,14 @@ public void OnLibraryRemoved(const char[] name)
 	if(!strcmp(name, "basecomm", false))
 	{
 		g_bBaseComm = false;
+	}
+	else if(!strcmp(name, "sourcecomms++", false))
+	{
+		g_bSourceComm = false;
+	}
+	else if(!strcmp(name, "materialadmin", false))
+	{
+		g_bMaterialAdmin = false;
 	}
 }
 
@@ -126,6 +146,11 @@ public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMes
 	user.GetDiscriminator(szDiscriminator, sizeof(szDiscriminator));
 	
 	DisposeObject(message);
+	
+	if(!szMessage[0])
+	{
+		new DiscordException("[chat relay] Message is empty. Make sure 'Message Content Intent' is enabled in bot settings. For more: [https://github.com/Cruze03/discord-utilities/wiki/Troubleshoot#discord-to-gameserver-is-sending-blank-message--verification-bot-is-not-responding-as-it-should]");
+	}
 
 	PrintToChatAll(" \x06» \x03%s#%s\x01: \x04%s", szUsername, szDiscriminator, szMessage);
 }
@@ -206,29 +231,83 @@ public int OnTransferCompleted(Handle hRequest, bool bFailure, bool bRequestSucc
 	delete kvResponse;
 }
 
-public Action OnClientSayCommand(int client, const char[] command, const char[] sArgs)
+public void OnClientSayCommand_Post(int client, const char[] sCommand, const char[] sArgs)
 {
 	if(strlen(g_sWebhook) < LEN_ID)
 	{
-		return Plugin_Continue;
+		return;
 	}
 	if(!client)
 	{
-		return Plugin_Continue;
+		return;
 	}
 	if(g_bBaseComm)
 	{
 		if(BaseComm_IsClientGagged(client))
 		{
-			return Plugin_Continue;
+			return;
 		}
 	}
-	if(sArgs[0] == g_sPChatTrigger[0] || sArgs[0] == g_sSChatTrigger[0] || sArgs[0] == '@')
+	if(g_bSourceComm)
 	{
-		return Plugin_Continue;
+		if(SourceComms_GetClientGagType(client) != bNot)
+		{
+			return;
+		}
 	}
-	SendChatRelay(client, sArgs);
-	return Plugin_Continue;
+	if(g_bMaterialAdmin)
+	{
+		if(MAGetClientMuteType(client) >= 2)
+		{
+			return;
+		}
+	}
+	if(IsStringEmpty(sArgs))
+	{
+		return;
+	}
+	int index = GetStringStartIndex(sArgs);
+	if(sArgs[index] == g_sPChatTrigger[0] || sArgs[index] == g_sSChatTrigger[0] || sArgs[index] == '@')
+	{
+		return;
+	}
+	SendChatRelay(client, sArgs[index]);
+}
+
+bool IsStringEmpty(const char[] sString)
+{
+	int len = strlen(sString);
+	if(len > 0)
+	{
+		for(int i = 0; i < len; i++)
+		{
+			if(sString[i] == ' ')
+			{
+				continue;
+			}
+			return false;
+		}
+	}
+	else
+		return true;
+	return true;
+}
+
+int GetStringStartIndex(const char[] sString)
+{
+	int count, len = strlen(sString);
+	if(len > 0)
+	{
+		for(int i = 0; i < len; i++)
+		{
+			if(sString[i] == ' ')
+			{
+				continue;
+			}
+			return i;
+		}
+	}
+	return count;
 }
 
 void SendChatRelay(int client, const char[] sArgs)

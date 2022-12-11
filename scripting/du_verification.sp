@@ -12,7 +12,7 @@ const int TIMEOUT_TIME = 30;
 
 char g_sInviteLink[64];
 
-char g_sChannelID[64], g_sChannelName[64], g_sMessageID[64], g_sGuildID[64], g_sRole[64], g_sCommand[64], g_sCommandInGame[64];
+char g_sChannelID[64], g_sChannelName[64], g_sMessageID[64], g_sGuildID[64], g_sRole[64], g_sCommand[5][256], g_sCommandInGame[5][256];
 bool g_bPrimary = false, g_bAddMessage = false, g_bLate = false;
 int g_iServerID = -1;
 
@@ -22,7 +22,7 @@ bool g_bChecked[MAXPLAYERS+1], g_bMember[MAXPLAYERS+1], g_bRoleGiven[MAXPLAYERS+
 Database g_hDB;
 bool g_bIsMySQl;
 
-Handle g_hOnLinkedAccount, g_hOnAccountRevoked, g_hOnClientLoaded, g_hOnBlockedCommandUse;
+Handle g_hOnLinkedAccount, g_hOnAccountRevoked, g_hOnClientLoaded, g_hOnBlockedCommandUse, g_hDeleteTimer;
 
 ArrayList g_hDeleteMessage;
 StringMap g_smDeleteMessage;
@@ -93,38 +93,64 @@ public void OnPluginStart()
 		{
 			DUMain_OnConfigLoaded();
 		}
+		OnMapStart();
 		g_bLate = false;
 	}
 }
 
 public void DUMain_OnConfigLoaded()
 {
+	char sBuffer[256];
 	DUMain_GetString("channel_verification", g_sChannelID, 64);
 	DUMain_GetString("message_verification", g_sMessageID, 64);
 	DUMain_GetString("guildid", g_sGuildID, 64);
 	DUMain_GetString("roleid", g_sRole, 64);
-	DUMain_GetString("command", g_sCommand, 64);
+	DUMain_GetString("command", g_sCommand[0], 256);
 	DUMain_GetString("database_name", g_sDatabaseName, 64);
 	DUMain_GetString("table_name", g_sTableName, 64);
 	DUMain_GetString("invite_link", g_sInviteLink, 64);
+	DUMain_GetString("use_swgm_for_blocked_commands", sBuffer, 8);
 
-	DUMain_GetString("command_ingame", g_sCommandInGame, 64);
-	if(!CommandExists(g_sCommandInGame))
+	DUMain_GetString("command_ingame", g_sCommandInGame[0], 256);
+	
+	ExplodeString(g_sCommand[0], ", ", g_sCommand, 5, 64);
+	
+	int count = ExplodeString(g_sCommandInGame[0], ", ", g_sCommandInGame, 5, 64), i;
+	
+	if(count > 0)
 	{
-		RegConsoleCmd(g_sCommandInGame, Command_Verify);
+		for(i = 0; i <= count; i++)
+		{
+			if(StrContains(g_sCommandInGame[i], "sm_") == 0)
+			{
+				if(!CommandExists(g_sCommandInGame[i]))
+				{
+					RegConsoleCmd(g_sCommandInGame[i], Command_Verify);
+				}
+			}
+		}
 	}
+	else
+	{
+		if(StrContains(g_sCommandInGame[0], "sm_") == 0)
+		{
+			RegConsoleCmd(g_sCommandInGame[0], Command_Verify);
+		}
+	}
+	
+	
 
 	char sBlockedCommands[512];
 	DUMain_GetString("blocked_commands", sBlockedCommands, 512);
 
 	char sValue[MAX_COMMANDS][64];
-	int count = ExplodeString(sBlockedCommands, ", ", sValue, MAX_COMMANDS, 64), i;
+	count = ExplodeString(sBlockedCommands, ", ", sValue, MAX_COMMANDS, 64);
 
 	if(count > 0)
 	{
 		for(i = 0; i <= count; i++)
 		{
-			if(sValue[i][0])
+			if(StrContains(sValue[i], "sm_") == 0)
 			{
 				AddCommandListener(Command_Block, sValue[i]);
 			}
@@ -132,10 +158,35 @@ public void DUMain_OnConfigLoaded()
 	}
 	else
 	{
-		if(sBlockedCommands[0])
+		if(StrContains(sBlockedCommands[0], "sm_") == 0)
 		{
 			AddCommandListener(Command_Block, sBlockedCommands);
 		}
+	}
+	
+	if(StrContains(sBuffer, "1") == 0)
+	{
+		KeyValues kv = new KeyValues("Command_Listener");
+		BuildPath(Path_SM, sBuffer, sizeof(sBuffer), "configs/swgm/command_listener.ini");
+		if(!FileToKeyValues(kv, sBuffer))
+		{
+			LogError("[Discord-Utilities-v2] Missing config file %s. If you don't use SWGM, then change 'use_swgm_for_blocked_commands' under `VERIFICATION_SETTINGS` section value to 0.", sBuffer);
+		}
+		else
+		{
+			if(kv.GotoFirstSubKey())
+			{
+				do
+				{
+					if(kv.GetSectionName(sBuffer, 64) && StrContains(sBuffer, "sm_") == 0)
+					{
+						AddCommandListener(Command_Block, sBuffer);
+					}
+				}
+				while (kv.GotoNextKey());
+			}
+		}
+		delete kv;
 	}
 
 	char sBuf[64];
@@ -188,7 +239,7 @@ void AddMessage()
 	
 	embed.WithTitle(sBuf);
 	
-	Format(sBuf, 666, "%T", "DiscordVerificationInfo", LANG_SERVER, ChangePartsInString(g_sCommandInGame, "sm_", "!"));
+	Format(sBuf, 666, "%T", "DiscordVerificationInfo", LANG_SERVER, ChangePartsInString(g_sCommandInGame[0], "sm_", "!"));
 	
 	embed.WithDescription(sBuf);
 	
@@ -240,7 +291,15 @@ public void OnMapStart()
 	g_hDeleteMessage = new ArrayList(ByteCountToCells(64));
 	g_smDeleteMessage = new StringMap();
 	
-	CreateTimer(1.0, Timer_DeleteMessages, _, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
+	if(!g_bLate)
+	{
+		g_hDeleteTimer = null;
+	}
+	else
+	{
+		delete g_hDeleteTimer;
+	}
+	g_hDeleteTimer = CreateTimer(4.0, Timer_DeleteMessages, _, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
 }
 
 public Action Timer_DeleteMessages(Handle timer)
@@ -261,8 +320,6 @@ public Action Timer_DeleteMessages(Handle timer)
 	static char sID[64];
 	
 	int iTime = GetTime();
-	
-	length = g_hDeleteMessage.Length;
 	
 	for(i = 0; i < length; i++)
 	{
@@ -588,7 +645,10 @@ public Action Command_DeleteAccount(int client, int args)
 		g_hDB.Format(sQuery, sizeof(sQuery), "UPDATE %s SET userid = '%s', member = '0' WHERE steamid = '%s';", g_sTableName, NULL_STRING, buffer);
 	}
 	DataPack pack = new DataPack();
-	pack.WriteCell(GetClientSerial(client));
+	if(client > 0)
+		pack.WriteCell(GetClientSerial(client));
+	else
+		pack.WriteCell(0);
 	if(iTarget != -1)
 		pack.WriteCell(GetClientSerial(iTarget));
 	else
@@ -616,11 +676,11 @@ public int SQLQuery_DeleteAccount(Database db, DBResultSet results, const char[]
 		g_bMember[target] = false;
 		g_sUserID[target][0] = '\0';
 	}
-	if((client = GetClientFromSerial(userid)) == 0)
+	if(userid != 0 && (client = GetClientFromSerial(userid)) == 0)
 	{
 		return;
 	}
-	CPrintToChat(client, "%T Successfully deleted account from database.", "ServerPrefix", client);
+	CReplyToCommand(client, "%T Successfully deleted account from database.", "ServerPrefix", client);
 }
 
 public void OnClientPutInServer(int client)
@@ -736,16 +796,32 @@ public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMes
 	
 	DisposeObject(message);
 	
+	if(!szMessage[0])
+	{
+		new DiscordException("[verification] Message is empty. Make sure 'Message Content Intent' is enabled in bot settings. For more: [https://github.com/Cruze03/discord-utilities/wiki/Troubleshoot#discord-to-gameserver-is-sending-blank-message--verification-bot-is-not-responding-as-it-should]");
+	}
+	
 	int count = ExplodeString(szMessage, " ", sValue, 2, 64);
 	TrimString(sValue[1]);
 	
 	int count2 = ExplodeString(sValue[1], "-", sValue2, 3, 64);
 	
-	if(strcmp(sValue[0], g_sCommand, false) != 0)
+	bool bCommand = false;
+	
+	for(int i = 0; i < 5; i++)
+	{
+		if(g_sCommand[i][0] && strcmp(sValue[0], g_sCommand[i], false) != 0)
+		{
+			continue;
+		}
+		bCommand = true;
+	}
+	
+	if(!bCommand)
 	{
 		if(g_bPrimary)
 		{
-			Format(sReply, 256, "%T", "DiscordInfo", LANG_SERVER, sUserID, g_sCommand);
+			Format(sReply, 256, "%T", "DiscordInfo", LANG_SERVER, sUserID, g_sCommand[0]);
 			SendMessageToChannel(channel, sReply);
 			DUMain_Bot().DeleteMessageID(g_sChannelID, sMessageID);
 		}
@@ -766,7 +842,7 @@ public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMes
 	{
 		if (g_bPrimary)
 		{
-			Format(sReply, 256, "%T", "DiscordInvalidID", LANG_SERVER, sUserID, g_sCommandInGame);
+			Format(sReply, 256, "%T", "DiscordInvalidID", LANG_SERVER, sUserID, g_sCommandInGame[0]);
 			SendMessageToChannel(channel, sReply);
 			DUMain_Bot().DeleteMessageID(g_sChannelID, sMessageID);
 		}
@@ -867,7 +943,7 @@ public Action Command_Verify(int client, int args)
 	
 	CPrintToChat(client, "%T %T", "ServerPrefix", client, "LinkConnect", client);
 	CPrintToChat(client, "%T {orange}%s{default}", "ServerPrefix", client, g_sInviteLink);
-	CPrintToChat(client, "%T %T", "ServerPrefix", client, "LinkUsage", client, g_sCommand, g_sUniqueCode[client], g_sChannelName);
+	CPrintToChat(client, "%T %T", "ServerPrefix", client, "LinkUsage", client, g_sCommand[0], g_sUniqueCode[client], g_sChannelName);
 	CPrintToChat(client, "%T %T", "ServerPrefix", client, "CopyPasteFromConsole", client);
 
 	char buf[128], g_sServerPrefix2[128];
@@ -880,7 +956,7 @@ public Action Command_Verify(int client, int args)
 	PrintToConsole(client, "*****************************************************");
 	PrintToConsole(client, "%s %T", g_sServerPrefix2, "LinkConnect", client, g_sInviteLink);
 	PrintToConsole(client, "%s %s", g_sServerPrefix2, g_sInviteLink);
-	Format(buf, sizeof(buf), "%T", "LinkUsage", client, g_sCommand, g_sUniqueCode[client], g_sChannelName);
+	Format(buf, sizeof(buf), "%T", "LinkUsage", client, g_sCommand[0], g_sUniqueCode[client], g_sChannelName);
 	for(int i = 0; i < sizeof(C_Tag); i++)
 	{
 		ReplaceString(buf, sizeof(buf), C_Tag[i], "");
@@ -916,7 +992,7 @@ public Action Command_Block(int client, const char[] command, int args)
 	}
 	if(!g_bMember[client])
 	{
-		CPrintToChat(client, "%T %T", "ServerPrefix", client, "MustVerify", client, ChangePartsInString(g_sCommandInGame, "sm_", "!"));
+		CPrintToChat(client, "%T %T", "ServerPrefix", client, "MustVerify", client, ChangePartsInString(g_sCommandInGame[0], "sm_", "!"));
 		return Plugin_Stop;
 	}
 	return Plugin_Continue;

@@ -1,6 +1,5 @@
 #include <sourcemod>
 #include <sdktools>
-#include <cstrike>
 
 #include <discord>
 #include <du2>
@@ -9,13 +8,12 @@
 #pragma semicolon 1
 
 #define EMBED_COLOR "#BF40BF"
-#define MAP_THUMBNAIL "https://image.gametracker.com/images/maps/160x120/csgo/MAPNAME.jpg" //'MAPNAME' will be replaced as current map name
 
 const float UPDATE_TIME = 15.0;
 
 ConVar g_hTimelimit, g_hMaxrounds;
 Handle g_hRepeater = null;
-char g_sMap[256], g_sServerName[128], g_sChannelID[64], g_sMessageID[64];
+char g_sMap[256], g_sMapThumbnail[256], g_sServerName[128], g_sChannelID[64], g_sMessageID[64], g_sServerIP[64], g_sServerPassword[128];
 bool g_bGameStart = false;
 int g_iRoundStart, g_iFreezetime;
 
@@ -38,8 +36,20 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 
 public void OnPluginStart()
 {
+	EngineVersion eGame = GetEngineVersion();
+	
+	if(eGame == Engine_CSGO)
+	{
+		HookEvent("round_freeze_end", Event_Round);
+	}
+	else if(eGame == Engine_TF2)
+	{
+		HookEvent("teamplay_round_start", Event_Round);
+		HookEvent("teamplay_win_panel", Event_Round);
+		HookEvent("teamplay_restart_round", Event_Round);
+		HookEvent("arena_win_panel", Event_Round);
+	}
 	HookEvent("round_start", Event_Round);
-	HookEvent("round_freeze_end", Event_Round);
 	HookEvent("round_end", Event_Round);
 	
 	RegAdminCmd("sm_sd_refresh", Command_Refresh, ADMFLAG_ROOT);
@@ -95,10 +105,19 @@ public void OnMapStart()
 	g_hRepeater = null;
 }
 
+public void DUMain_OnServerPasswordChanged(const char[] oldVal, const char[] newVal)
+{
+	DUMain_GetServerPassword(g_sServerPassword);
+}
+
 public void DUMain_OnConfigLoaded()
 {
 	DUMain_GetString("channel_map", g_sChannelID, 64);
 	DUMain_GetString("message_map", g_sMessageID, 64);
+	DUMain_GetString("map_thumbnail", g_sMapThumbnail, 256);
+	DUMain_GetString("server_dns_name", g_sServerIP, 64);
+	
+	DUMain_GetServerPassword(g_sServerPassword);
 	
 	if(strlen(g_sChannelID) < LEN_ID)
 	{
@@ -199,7 +218,8 @@ public void OnAutoConfigsBuffered()
 public Action Timer_OnAutoConfigsBuffered(Handle timer)
 {
 	FindConVar("hostname").GetString(g_sServerName, sizeof(g_sServerName));
-	g_iFreezetime = FindConVar("mp_freezetime").IntValue;
+	if(FindConVar("mp_freezetime") != null)
+		g_iFreezetime = FindConVar("mp_freezetime").IntValue;
 }
 
 public int OnSettingsChanged(ConVar cvar, const char[] oldVal, const char[] newVal)
@@ -209,7 +229,7 @@ public int OnSettingsChanged(ConVar cvar, const char[] oldVal, const char[] newV
 
 public void Event_Round(Event ev, const char[] name, bool dbc)
 {
-	if(strcmp(name, "round_start", false) == 0 && g_iFreezetime < 1)
+	if((strcmp(name, "round_start", false) == 0 && g_iFreezetime < 1) || strcmp(name, "teamplay_round_start", false) == 0)
 	{
 		g_bGameStart = true;
 		g_iRoundStart = GetTime()+1;
@@ -223,7 +243,8 @@ public void Event_Round(Event ev, const char[] name, bool dbc)
 	{
 		delete g_hRepeater;
 	}
-	CreateTimer(1.0, Timer_UpdateScores, strcmp(name, "round_freeze_end", false));
+	bool bRoundend = (strcmp(name, "round_freeze_end", false == 0 || strcmp(name, "teamplay_round_start", false) == 0);
+	CreateTimer(1.0, Timer_UpdateScores, bRoundend);
 }
 
 public Action Timer_UpdateScores(Handle timer, any data)
@@ -256,7 +277,7 @@ public void UpdateScores()
 		return;
 	}
 	
-	char sTeamScore[64], sTimeleft[64], sTime[64], sOnline[16], sRoundTime[16], sBuf[512], sTrans[64];
+	char sTeamScore[64], sTimeleft[64], sTime[64], sOnline[16], sRoundTime[16], sBuf[512], sTrans[64], sDirectConnect[256];
 	int timeleft, timeplayed, totalroundtime, roundtimeleft, roundsleft, scoreCT, scoreT;
 	
 	scoreCT = GetTeamScore(3);
@@ -276,9 +297,9 @@ public void UpdateScores()
 	
 	Format(sTeamScore, 64, "%T", "TeamScore", LANG_SERVER, scoreCT > 1000 ? 0 : scoreCT, scoreT > 1000 ? 0 : scoreT);
 	
-	Format(sBuf, 512, MAP_THUMBNAIL);
+	Format(sBuf, 512, g_sMapThumbnail);
 	
-	ReplaceString(sBuf, 512, "MAPNAME", g_sMap);
+	ReplaceString(sBuf, 512, "{MAPNAME}", g_sMap);
 	
 	Format(sOnline, 16, "%i/%i", GetOnlinePlayers(), GetMaxHumanPlayers());
 	
@@ -350,13 +371,25 @@ public void UpdateScores()
 	embed.AddField(new DiscordEmbedField(sTrans, sOnline, true));
 	
 	Format(sTrans, 64, "%T", "TeamScoreTitle", LANG_SERVER);
-	embed.AddField(new DiscordEmbedField(sTrans, sTeamScore, false));
+	embed.AddField(new DiscordEmbedField(sTrans, sTeamScore, true));
 	
 	Format(sTrans, 64, "%T", "RoundTimeleft", LANG_SERVER);
 	embed.AddField(new DiscordEmbedField(sTrans, sRoundTime, true));
 	
 	Format(sTrans, 64, "%T", "Timeleft", LANG_SERVER);
 	embed.AddField(new DiscordEmbedField(sTrans, sTimeleft, true));
+	
+	if(g_sServerPassword[0])
+	{
+		Format(sDirectConnect, 256, "steam://connect/%s/%s", g_sServerIP, g_sServerPassword);
+	}
+	else
+	{
+		Format(sDirectConnect, 256, "steam://connect/%s", g_sServerIP);
+	}
+	
+	Format(sTrans, 64, "%T", "DirectConnect", LANG_SERVER);
+	embed.AddField(new DiscordEmbedField(sTrans, sDirectConnect, true));
 	
 	embed.WithFooter(new DiscordEmbedFooter(sTime));
 	
