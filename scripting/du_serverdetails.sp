@@ -229,12 +229,7 @@ public int OnSettingsChanged(ConVar cvar, const char[] oldVal, const char[] newV
 
 public void Event_Round(Event ev, const char[] name, bool dbc)
 {
-	if((strcmp(name, "round_start", false) == 0 && g_iFreezetime < 1) || strcmp(name, "teamplay_round_start", false) == 0)
-	{
-		g_bGameStart = true;
-		g_iRoundStart = GetTime()+1;
-	}
-	else if(strcmp(name, "round_freeze_end", false) == 0)
+	if((strcmp(name, "round_start", false) == 0 && g_iFreezetime < 1) || strcmp(name, "round_freeze_end", false) == 0 || strcmp(name, "teamplay_round_start", false) == 0)
 	{
 		g_bGameStart = true;
 		g_iRoundStart = GetTime()+1;
@@ -243,8 +238,7 @@ public void Event_Round(Event ev, const char[] name, bool dbc)
 	{
 		delete g_hRepeater;
 	}
-	bool bRoundend = (strcmp(name, "round_freeze_end", false) == 0 || strcmp(name, "teamplay_round_start", false) == 0);
-	CreateTimer(1.0, Timer_UpdateScores, bRoundend);
+	CreateTimer(1.0, Timer_UpdateScores, !strcmp(name, "round_freeze_end", false), TIMER_FLAG_NO_MAPCHANGE);
 }
 
 public Action Timer_UpdateScores(Handle timer, any data)
