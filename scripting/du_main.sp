@@ -1,18 +1,19 @@
 #include <sourcemod>
+#include <SteamWorks>
 
 #include <discord>
 #include <du2>
 
 StringMap g_smParser;
 SMCParser g_hParser;
-char g_sSection[64], g_sBotToken[256], g_sGuildID[64], g_sRole[64], g_sInviteLink[64], g_sCommand[64], g_sCommandInGame[64], g_sDatabaseName[64], g_sBlockedCommands[512], g_sTableName[64], g_sAPIKey[128], g_sChat_Webhook[256], g_sBugReport_Webhook[256], g_sCallAdmin_Webhook[256], g_sBans_Webhook[256], g_sComms_Webhook[256], g_sReportPlayer_Webhook[256];
+char g_sSection[64], g_sBotToken[256], g_sGuildID[64], g_sRole[64], g_sInviteLink[64], g_sCommand[256], g_sCommandInGame[256], g_sDatabaseName[64], g_sBlockedCommands[512], g_sTableName[64], g_sServersTableName[64], g_sAPIKey[128], g_sChat_Webhook[256], g_sBugReport_Webhook[256], g_sCallAdmin_Webhook[256], g_sBans_Webhook[256], g_sComms_Webhook[256], g_sReportPlayer_Webhook[256], g_sMapThumbnail[256], g_sUseSWGM[8], g_sServerDNS[64], g_sServerPassword[128];
 char g_sMap_ChannelID[64], g_sChat_ChannelID[64], g_sVerification_ChannelID[64];
 char g_sMap_MessageID[64], g_sVerification_MessageID[64];
 
 bool g_bPrimary, g_bReady;
 int g_iServerID;
 
-Handle g_hOnConfigLoaded;
+Handle g_hOnConfigLoaded, g_hOnPasswordChanged;
 
 DiscordBot g_eBot = null;
 
@@ -33,11 +34,18 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 	CreateNative("DUMain_ReloadConfig", Native_ReloadConfig);
 	CreateNative("DUMain_IsConfigLoaded", Native_IsConfigLoaded);
 	CreateNative("DUMain_Bot", Native_Bot);
+	CreateNative("DUMain_GetServerPassword", Native_GetServerPassword);
 	
 	CreateNative("DUMain_GetString", Native_GetString);
 	CreateNative("DUMain_SetString", Native_SetString);
 	
 	g_hOnConfigLoaded = CreateGlobalForward("DUMain_OnConfigLoaded", ET_Ignore);
+	g_hOnPasswordChanged = CreateGlobalForward("DUMain_OnServerPasswordChanged", ET_Ignore, Param_String, Param_String);
+}
+
+public int Native_GetServerPassword(Handle plugin, int numParams)
+{
+	SetNativeString(1, g_sServerPassword, 128);
 }
 
 public int Native_Bot(Handle plugin, int numParams)
@@ -128,7 +136,7 @@ public void OnPluginStart()
 	{
 		SetFailState("[DU-Main] You are running an older version of discord api. Please update to the latest version.");
 	}
-	if(DiscordAPI_Version() < 102)
+	if(DiscordAPI_Version() < 103)
 	{
 		SetFailState("[DU-Main] You are running an older version of discord api. Please update to the latest version.");
 	}
@@ -308,6 +316,35 @@ public SMCResult Config_KeyValue(SMCParser smc, const char[] key, const char[] v
 			strcopy(g_sReportPlayer_Webhook, 256, value);
 		}
 	}
+	else if(!strcmp(g_sSection, "WEBHOOK_SETTINGS"))
+	{
+		if(!strcmp(key, "map_thumnail"))
+		{
+			strcopy(g_sMapThumbnail, 256, value);
+		}
+		else if(!strcmp(key, "server_dns_name"))
+		{
+			if(value[0])
+			{
+				strcopy(g_sServerDNS, 64, value);
+			}
+			else
+			{
+				int ip[4];
+				int iServerPort = FindConVar("hostport").IntValue;
+				SteamWorks_GetPublicIP(ip);
+				if(SteamWorks_GetPublicIP(ip))
+				{
+					Format(g_sServerDNS, 64, "%d.%d.%d.%d:%d", ip[0], ip[1], ip[2], ip[3], iServerPort);
+				}
+				else
+				{
+					int iServerIP = FindConVar("hostip").IntValue;
+					Format(g_sServerDNS, 64, "%d.%d.%d.%d:%d", iServerIP >> 24 & 0x000000FF, iServerIP >> 16 & 0x000000FF, iServerIP >> 8 & 0x000000FF, iServerIP & 0x000000FF, iServerPort);
+				}
+			}
+		}
+	}
 	else if(!strcmp(g_sSection, "VERIFICATION_SETTINGS"))
 	{
 		if(!strcmp(key, "primary"))
@@ -332,15 +369,19 @@ public SMCResult Config_KeyValue(SMCParser smc, const char[] key, const char[] v
 		}
 		else if(!strcmp(key, "command"))
 		{
-			strcopy(g_sCommand, 64, value);
+			strcopy(g_sCommand, 256, value);
 		}
 		else if(!strcmp(key, "command_ingame"))
 		{
-			strcopy(g_sCommandInGame, 64, value);
+			strcopy(g_sCommandInGame, 256, value);
 		}
 		else if(!strcmp(key, "blocked_commands"))
 		{
 			strcopy(g_sBlockedCommands, 512, value);
+		}
+		else if(!strcmp(key, "use_swgm_for_blocked_commands"))
+		{
+			strcopy(g_sUseSWGM, 8, value);
 		}
 		else if(!strcmp(key, "database_name"))
 		{
@@ -349,6 +390,10 @@ public SMCResult Config_KeyValue(SMCParser smc, const char[] key, const char[] v
 		else if(!strcmp(key, "table_name"))
 		{
 			strcopy(g_sTableName, 64, value);
+		}
+		else if(!strcmp(key, "servers_table_name"))
+		{
+			strcopy(g_sServersTableName, 64, value);
 		}
 	}
 	return SMCParse_Continue;
@@ -379,6 +424,10 @@ public void Config_End(SMCParser smc, bool halted, bool failed)
 	g_smParser.SetString("webhook_comms", g_sComms_Webhook);
 	g_smParser.SetString("webhook_report", g_sReportPlayer_Webhook);
 	
+	g_smParser.SetString("map_thumbnail", g_sMapThumbnail);
+	g_smParser.SetString("server_dns_name", g_sServerDNS);
+	g_smParser.SetString("use_swgm_for_blocked_commands", g_sUseSWGM);
+	
 	char value[8];
 	IntToString(g_bPrimary, value, 8);
 	g_smParser.SetString("primary", value);
@@ -393,6 +442,7 @@ public void Config_End(SMCParser smc, bool halted, bool failed)
 	g_smParser.SetString("blocked_commands", g_sBlockedCommands);
 	g_smParser.SetString("database_name", g_sDatabaseName);
 	g_smParser.SetString("table_name", g_sTableName);
+	g_smParser.SetString("servers_table_name", g_sServersTableName);
 	
 	if(strlen(g_sBotToken) > LEN_ID)
 	{
@@ -401,7 +451,42 @@ public void Config_End(SMCParser smc, bool halted, bool failed)
 	
 	g_bReady = true;
 	
+	ConVar cvar = FindConVar("sv_password");
+	if(cvar != null)
+	{
+		cvar.GetString(g_sServerPassword, 128);
+		cvar.AddChangeHook(OnPasswordChange);
+	}
+	delete cvar;
+	
 	Call_StartForward(g_hOnConfigLoaded);
+	Call_Finish();
+	
+	// Adding du tags in sv_tags to help me keep track of server using this plugin.
+	ConVar hTags = FindConVar("sv_tags");
+	
+	if(hTags != null)
+	{
+		char sBuffer[256];
+		hTags.GetString(sBuffer, 256);
+		Format(sBuffer, 256, "%s,du,duv2", sBuffer);
+		hTags.SetString(sBuffer);
+	}
+	delete hTags;
+}
+
+public int OnPasswordChange(ConVar cvar, const char[] oldVal, const char[] newVal)
+{
+	if(StrEqual(oldVal, newVal))
+	{
+		return;
+	}
+	
+	cvar.GetString(g_sServerPassword, 128);
+	
+	Call_StartForward(g_hOnPasswordChanged);
+	Call_PushString(oldVal);
+	Call_PushString(newVal);
 	Call_Finish();
 }
 
