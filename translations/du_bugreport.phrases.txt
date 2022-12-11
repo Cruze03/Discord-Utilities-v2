@@ -2,26 +2,31 @@
 {
 	"EmbedTitle"
 	{
+	        "ru"                    "Новый репорт"
 		"en"			"New Report"
 		"lv"			"Jauna Sūdzība/Ieteikums"
 	}
 	"Reporter"
 	{
+	        "ru"                    "Жалоба от:"
 		"en"			"Reporter:"
 		"lv"			"Ziņotājs:"
 	}
 	"Map"
 	{
+	        "ru"                    "Карта:"
 		"en"			"Map:"
 		"lv"			"Karte:"
 	}
 	"Reason"
 	{
+	        "ru"                    "Причина:"
 		"en"			"Reason:"
 		"lv"			"Iemesls:"
 	}
 	"DirectConnect"
 	{
+	        "ru"            "Подключиться:"
 		"en"		"Direct Connect:"
 	}
 }
