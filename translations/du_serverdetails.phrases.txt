@@ -21,7 +21,7 @@
 	}
 	"Warmup"
 	{
-	        "ru"		"РАЗМИНКА"
+		"ru"		"РАЗМИНКА"
 		"en"		"WARMUP"
 	}
 	"RoundsLeft"
@@ -47,22 +47,22 @@
 	}
 	"TeamScoreTitle"
 	{
-	        "ru"		"Командный счет:"
+		"ru"		"Командный счет:"
 		"en"		"Team Score:"
 	}
 	"RoundTimeleft"
 	{
-	        "ru"            "Оставшееся время раунда:"
+		"ru"		"Оставшееся время раунда:"
 		"en"		"Round Timeleft:"
 	}
 	"Timeleft"
 	{
-		"ru"            "Оставшееся время:"
+		"ru"		"Оставшееся время:"
 		"en"		"Timeleft:"
 	}
 	"DirectConnect"
 	{
-	        "ru"            "Подключиться:"
+		"ru"		"Подключиться:"
 		"en"		"Direct Connect:"
 	}
 	"TimeleftFormat1"
