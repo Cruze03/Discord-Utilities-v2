@@ -3,7 +3,7 @@
 #endif
 #define _discord_utilities_v2_included
 
-#define DU_VERSION "1.0.2"
+#define DU_VERSION "1.0.3"
 
 const int LEN_ID = 10;				// Channel ID length less than this value is considered invalid
 const int MAX_COMMANDS = 64;		// Max commands possible in "VERIFICATION_SETTINGS" > "blocked_commands"
@@ -14,10 +14,12 @@ native void DUMain_ReloadConfig();
 native bool DUMain_IsConfigLoaded();
 native bool DUMain_GetString(char[] key, char[] value, int size);
 native bool DUMain_SetString(char[] key, char[] value, int size);
+native void DUMain_GetServerPassword(char[] password);
 
 native DiscordBot DUMain_Bot();
 
 forward void DUMain_OnConfigLoaded();
+forward void DUMain_OnServerPasswordChanged(const char[] oldValue, const char[] newValue);
 
 //du_verification
 native bool DUVerification_IsChecked(int client);
