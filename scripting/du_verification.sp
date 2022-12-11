@@ -810,7 +810,7 @@ public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMes
 	
 	for(int i = 0; i < 5; i++)
 	{
-		if(g_sCommand[i][0] && strcmp(sValue[0], g_sCommand[i], false) != 0)
+		if(!g_sCommand[i][0] || strcmp(sValue[0], g_sCommand[i], false) != 0)
 		{
 			continue;
 		}
