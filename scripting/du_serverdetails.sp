@@ -243,7 +243,7 @@ public void Event_Round(Event ev, const char[] name, bool dbc)
 	{
 		delete g_hRepeater;
 	}
-	bool bRoundend = (strcmp(name, "round_freeze_end", false == 0 || strcmp(name, "teamplay_round_start", false) == 0);
+	bool bRoundend = (strcmp(name, "round_freeze_end", false) == 0 || strcmp(name, "teamplay_round_start", false) == 0);
 	CreateTimer(1.0, Timer_UpdateScores, bRoundend);
 }
 
