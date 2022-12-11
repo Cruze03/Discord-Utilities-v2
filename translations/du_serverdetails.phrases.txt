@@ -51,6 +51,10 @@
 	{
 		"en"		"Timeleft:"
 	}
+	"DirectConnect"
+	{
+		"en"		"Direct Connect:"
+	}
 	"TimeleftFormat1"
 	{
 		"#format"	"{1:i},{2:i}" 			// 1 - Hour | 2 - minutes [Used in timeleft]

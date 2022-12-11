@@ -21,6 +21,10 @@
 	{
 		"en"		"SILENCE"
 	}
+	"Permanent"
+	{
+		"en"			"PERMANENT"
+	}
 	"Admin"
 	{
 		"en"		"Admin:"
@@ -60,5 +64,9 @@
 	"Reason"
 	{
 		"en"		"Reason:"
+	}
+	"DirectConnect"
+	{
+		"en"		"Direct Connect:"
 	}
 }
