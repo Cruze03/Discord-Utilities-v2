@@ -23,7 +23,7 @@
 	}
 	"SILENCE"
 	{
-	        "ru"		"Молчание"
+		"ru"		"Молчание"
 		"en"		"SILENCE"
 	}
 	"Permanent"

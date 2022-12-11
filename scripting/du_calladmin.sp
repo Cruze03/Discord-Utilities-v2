@@ -98,8 +98,7 @@ public void CallAdmin_OnReportPost(int client, int target, const char[] reason)
 	char sTrans[128];
 	
 	DiscordWebHook hook = new DiscordWebHook(g_sCallAdmin_Webhook);
-	
-	Format(sTrans, 128, "%T", "ReportMessageTitle", LANG_SERVER);
+	Format(sTrans, 128, "%T", "ReportMessageTitle", LANG_SERVER, g_iLastReportID);
 	
 	hook.SetContent(sTrans);
 	

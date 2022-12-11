@@ -4,19 +4,22 @@
 	{
 		"ru"		"{green}[DU]{default}"
 		"en"		"{green}[DU]{default}"
+		"hu"		"{green}[DU]{default}"
 		"lv"		"{green}[DU]{default}"
 	}
 	"DiscordVerificationInfoTitle"
 	{
 		"ru"		"Канал Верификации"
 		"en"		"Verification Channel"
+		"hu"		"Hitelesítő csatorna"
 		"lv"		"Verifikācijas Kanāls"
 	}
 	"DiscordVerificationInfo"
 	{
 		"#format"	"{1:s}"
-		"ru"            "**Что делать:**\n \n**-** Подключиться к одному из наших серверов **#servers** канал и написать **{1}** в чат\n**-** Скопируйте код верификации, как показано на рисунке ниже.\n**-** Вставьте его в этот канал и **ожидайте**"
+		"ru"		"**Что делать:**\n \n**-** Подключиться к одному из наших серверов **#servers** канал и написать **{1}** в чат\n**-** Скопируйте код верификации, как показано на рисунке ниже.\n**-** Вставьте его в этот канал и **ожидайте**"
 		"en"		"**What to do:**\n \n**-** Join one of our server by going to **#servers** channel and type **{1}** in chat\n**-** Copy the verification code as show in the image below.\n**-** Paste it here and **be patient**"
+		"hu"		"**Mi a teendő:**\n \n**-** Csatlakozz fel valamelyik szerverünkre és írd be a(z) **{1}** parancsot a chatre\n**-** Másold ki a hitelesítő kódot, a folyamatról képet láthatsz.\n**-** Másold be ide és **légy türelmes**"
 		"lv"		"**Ko darīt:**\n \n**-** Pievienojies vienam no mūsu serveriem **#servers** un raksti **{1}** čatā\n**-** Nokopē verifikācijas kodu kā tas ir parādīts bildē.\n**-** Iekopē to šeit čatā un **gaidi**"
 	}
 	"DiscordVerified"
@@ -59,8 +62,9 @@
 	"DiscordPleaseWait"
 	{
 		"#format"	"{1:s}"
-		"ru"            "<@{1}> Пожалуйста, подождите, пока мы проверим ваш код верификации ⏳\n \n**Note:**\n**-** Не отправляйте спам в этот период, так как это может привести к ограничению скорости передачи данных. \n**-** Ваш код верификации был изменен в целях безопасности. Введите !verify в игре ещё раз **if BOT fails to verify**.\n \n \n"
+		"ru"		"<@{1}> Пожалуйста, подождите, пока мы проверим ваш код верификации ⏳\n \n**Note:**\n**-** Не отправляйте спам в этот период, так как это может привести к ограничению скорости передачи данных. \n**-** Ваш код верификации был изменен в целях безопасности. Введите !verify в игре ещё раз **if BOT fails to verify**.\n \n \n"
 		"en"		"<@{1}> Please wait while we confirm your verification code. ⏳\n \n**Note:**\n**-** Do not spam in this period because this may get BOT rate limited. \n**-** Your verification code has been changed for security purposes. Kindly type !verify in-game again **if BOT fails to verify**.\n \n \n"
+		"hu"		"<@{1}> Kérlek várj, amíg hitelesítünk. ⏳\n \n**Megjegyzés:**\n**-** Ne spammelj közben, mert a BOT korlátozást kaphat. \n**-** A te hitelesítő kódod megváltozott biztonsági okokból. Kérlek, írd be a !verify parancsot a játékban újra **ha a BOT-nak nem sikerül a hitelesítés**.\n \n \n"
 		"lv"		"<@{1}> Uzgaidi kamēr mēs apstiprinam tavu verifikācijas kodu. ⏳\n \n**Ņem vērā:**\n**-** Nespamo savādāk Discord Bots tiks rate limited. \n**-** Tavs kods tika mainīts drošības iemeslu dēļ. Raksti !verify spēlē atkal **Ja Bots nespēj verificēt kodu**.\n \n \n"
 	}
 	"DiscordNoRowFound"
@@ -68,12 +72,14 @@
 		"#format"	"{1:s}"
 		"ru"		"<@{1}> Мы не можем найти вас в нашей базе данных. Свяжитесь с Администрацией"
 		"en"		"<@{1}> We are unable to find details of you in our database. Kindly contact the admins for the same."
+		"hu"		"<@{1}> Nem találjuk az adataidat az adatbázisunkban. Kérlek, vedd fel a kapcsolatot az adminisztrátorokkal."
 		"lv"		"<@{1}> Mēs nevaram atrast tavus datus datubāzē. Sazinies ar adminstrātoru."
 	}
 	"DiscordAlreadyMember"
 	{
 		"ru"		"Вы уже связали ваш свой дискорд!"
 		"en"		"You've already linked your discord!"
+		"hu"		"Már összekötötted magad discordon!"
 		"lv"		"Tu jau savienoji savu discord profilu ar serveri!"
 	}
 	"DiscordInfo"
@@ -121,12 +127,12 @@
 		"fr"		"<@{1}> Il n'y a pas de client avec cet identifiant, assurez-vous d'être connecté au serveur de jeu et vérifiez à nouveau votre identifiant!"
 		"nl"		"<@{1}> Er is geen client met deze ID, zorg ervoor dat je verbonden bent met de spelserver en controleer je ID opnieuw!"
 		"lv"		"<@{1}> Nav neviena klienta ar šo ID, pārliecinieties, vai esat izveidojis savienojumu ar spēles serveri, un pārbaudiet savu ID vēlreiz!"
-		"ru"            "<@{1}> Игрока с таким кодом верификации нет, убедитесь, что вы подключены к игровому серверу, и проверьте свой код еще раз!"
+		"ru"		"<@{1}> Игрока с таким кодом верификации нет, убедитесь, что вы подключены к игровому серверу, и проверьте свой код еще раз!"
 		"ro"		"<@{1}> Nu există niciun client cu acest ID, fii sigur că ești conectat la joc si verifică ID din nou!"
 	}
 	"TryAgainLater"
 	{
-		"ru"            "Пожалуйста, подождите. Ваш статус участника еще не был получен."
+		"ru"		"Пожалуйста, подождите. Ваш статус участника еще не был получен."
 		"en"		"Please wait. Your member status hasn't been fetched yet."
 		"hu"		"Kérlek várj egy picit! A tagságod még lekérés alatt."
 		"lv"		"Lūdzu uzgaidi. Tavs discord member status vēl nav apstrādāts."
@@ -146,7 +152,7 @@
 	}
 	"LinkConnect"
 	{
-		"ru"            "Зайдите в discord сервер:"
+		"ru"		"Зайдите в discord сервер:"
 		"en"		"Join our discord server:"
 		"hu"		"Csatlakozz a Discord szerverünkhöz:"
 		"lv"		"Pievienojies mūsu Discord serverim:"
@@ -155,7 +161,7 @@
 	"LinkUsage"
 	{
 		"#format"	"{1:s},{2:s},{3:s}"
-		"ru"            "Введите {lime}{1} {2} {default}в {orange}{3}{default} канал"
+		"ru"		"Введите {lime}{1} {2} {default}в {orange}{3}{default} канал"
 		"en"		"Type {lime}{1} {2} {default}in {orange}{3}{default} channel"
 		"hu"		"Használd a {lime}{1} {2} {default}parancsot a {orange}{3} {default}szobában"
 		"en"		"Raksti {lime}{1} {2} {default}iekšā {orange}{3}{default} kanālā"
@@ -163,7 +169,7 @@
 	}
 	"CopyPasteFromConsole"
 	{
-		"ru"            "Вы также можете {lime} Скопировать {default}это {orange}в консоли{default} :)
+		"ru"		"Вы также можете {lime} Скопировать {default}это {orange}в консоли{default} :)
 		"en"		"You can also {lime}copy-paste{default} from {orange}console{default} :)"
 		"hu"		"Ki is {lime}másolhatod {default}a {orange}konzolból{default} :)"
 		"lv"		"Jūs varat kopēt arī ziņu {lime}copy-paste{default} no {orange}konsoles{default} :)"
@@ -171,8 +177,9 @@
 	}
 	"DiscordRevoked"
 	{
-		"ru"            "Вы больше не находитесь на нашем сервере discord, поэтому ваш статус участника discord был аннулирован!"
+		"ru"		"Вы больше не находитесь на нашем сервере discord, поэтому ваш статус участника discord был аннулирован!"
 		"en"		"You are no longer in our discord server therefore your discord member status has been revoked!"
+		"hu"		"Már nem vagy fent discord szerverünkön, ezért a discord tagsági státuszod visszavonásra került!"
 		"lv"		"Jūs vairāk neesat mūsu discord serverī. Jūsu discord member statuss ir noņemts!"
 		"pt"		"Você não está mais em nosso servidor discord, portanto, seu status de membro discord foi revogado!"
 		"ro"        "Numai faci parte din server-ul nostru de discord, rolul tău de membru a fost sters!"
