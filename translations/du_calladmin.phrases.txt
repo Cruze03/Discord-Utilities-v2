@@ -2,56 +2,57 @@
 {
 	"HandleEmbedTitle"
 	{
-		"ru"		"Жалоба обрабатывается Администратором"
 		"en"		"A report is being handled by an Admin"
 		"lv"		"Admins apstrādā sūdzību..."
+		"ru"		"Жалоба обрабатывается Администратором"
 	}
 	"Handler"
 	{
-		"ru"		"Обрабатывается:"
 		"en"		"Handler:"
 		"lv"		"Apstrāda:"
+		"ru"		"Обрабатывается:"
 	}
 	"ReportID"
 	{
-		"ru"		"Жалоба ID:"
 		"en"		"Report ID:"
 		"lv"		"Ziņotāja ID:"
+		"ru"		"Жалоба ID:"
 	}
 	"ReportMessageTitle"
 	{
 		"#format"	"{1:d}"
-		"ru"		"Находясь в игре, введите !!calladmin_handle {1} чтобы обработать эту жалобу."
 		"en"		"When in-game type !calladmin_handle {1} in chat to handle this report."
 		"lv"		"Kad esi spēlē raksti čatā !calladmin_handle {1} lai apstrādātu sūdzību."
+		"ru"		"Находясь в игре, введите !!calladmin_handle {1} чтобы обработать эту жалобу."
 	}
 	"ReportEmbedTitle"
 	{
-		"ru"		"Новый репорт"
 		"en"		"New Report"
 		"lv"		"Jauna Sūdzība"
+		"ru"		"Новый репорт"
 	}
 	"Reporter"
 	{
-		"ru"		"Жалоба от:"
 		"en"		"Reporter:"
 		"lv"		"Ziņotājs:"
+		"ru"		"Жалоба от:"
 	}
 	"Target"
 	{
-		"ru"		"Нарушитель:"
 		"en"		"Target:"
 		"lv"		"Apsūdz:"
+		"ru"		"Нарушитель:"
 	}
 	"Reason"
 	{
-		"ru"		"Причина:"
 		"en"		"Reason:"
 		"lv"		"Iemesls:"
+		"ru"		"Причина:"
 	}
 	"DirectConnect"
 	{
-		"ru"		"Подключиться:"
 		"en"		"Direct Connect:"
+		"lv"		"Pievienoties serverim:"
+		"ru"		"Подключиться:"
 	}
 }
