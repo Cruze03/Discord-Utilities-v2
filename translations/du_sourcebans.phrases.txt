@@ -2,44 +2,44 @@
 {
 	"MuteEmbedTitle"
 	{
-		"ru"		"Новый игрок забанен в сообществом"
 		"en"		"New Player Comm-Banned!"
+		"ru"		"Новый игрок забанен в сообществом"
 	}
 	"TimeInMinutes"
 	{
 		"#format"	"{1:i}"
-		"ru"		"{1} минут(ы)"
 		"en"		"{1} minute(s)"
+		"ru"		"{1} минут(ы)"
 	}
 	"MUTE"
 	{
-		"ru"		"Мут"
 		"en"		"MUTE"
+		"ru"		"Мут"
 	}
 	"GAG"
 	{
-		"ru"		"Гаг"
 		"en"		"GAG"
+		"ru"		"Гаг"
 	}
 	"SILENCE"
 	{
-		"ru"		"Молчание"
 		"en"		"SILENCE"
+		"ru"		"Молчание"
 	}
 	"Permanent"
 	{
-		"ru"			"Навсегда"
-		"en"			"PERMANENT"
+		"en"		"PERMANENT"
+		"ru"		"Навсегда"
 	}
 	"Admin"
 	{
-		"ru"		"Администратор:"
 		"en"		"Admin:"
+		"ru"		"Администратор:"
 	}
 	"Player"
 	{
-		"ru"		"Игрок:"
 		"en"		"Player:"
+		"ru"		"Игрок:"
 	}
 	"Length"
 	{
@@ -48,42 +48,42 @@
 	}
 	"Type"
 	{
-		"ru"		"Тип:"
 		"en"		"Type:"
+		"ru"		"Тип:"
 	}
 	"Reason"
 	{
-		"ru"		"Причина:"
 		"en"		"Reason:"
+		"ru"		"Причина:"
 	}
 	"BanEmbedTitle"
 	{
-		"ru"		"Новый игрок забанен на сервере"
 		"en"		"New Player Server Banned!"
+		"ru"		"Новый игрок забанен на сервере"
 	}
 	"ReportEmbedTitle"
 	{
-		"ru"		"Новый репорт"
 		"en"		"New Report"
+		"ru"		"Новый репорт"
 	}
 	"Reporter"
 	{
-		"ru"		"Жалоба от:"
 		"en"		"Reporter:"
+		"ru"		"Жалоба от:"
 	}
 	"Target"
 	{
-		"ru"		"Нарушитель:"
 		"en"		"Target:"
+		"ru"		"Нарушитель:"
 	}
 	"Reason"
 	{
-		"ru"		"Причина:"
 		"en"		"Reason:"
+		"ru"		"Причина:"
 	}
 	"DirectConnect"
 	{
-		"ru"		"Подключиться:"
 		"en"		"Direct Connect:"
+		"ru"		"Подключиться:"
 	}
 }
