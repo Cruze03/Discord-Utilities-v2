@@ -231,7 +231,7 @@
 		"hu"		"<@{1}> Nem található kliens ezzel az azonosítóval. Kérlek csatlakozz a szerverre és próbáld újra!"
 		"lv"		"<@{1}> Nav neviena klienta ar šo ID, pārliecinieties, vai esat izveidojis savienojumu ar spēles serveri, un pārbaudiet savu ID vēlreiz!"
 		"nl"		"<@{1}> Er is geen client met deze ID, zorg ervoor dat je verbonden bent met de spelserver en controleer je ID opnieuw!"
-            "no"     		"<@{1}> Det er ingen klient med denne IDen, sørg for at du er koblet til spillserveren og sjekk IDen din på nytt!"
+            	"no"     	"<@{1}> Det er ingen klient med denne IDen, sørg for at du er koblet til spillserveren og sjekk IDen din på nytt!"
 		"pt"		"<@{1}> Não há nenhum cliente com este ID, certifique-se de estar conectado ao servidor do jogo e verifique seu ID novamente!"
 		"pt_p"     	"<@{1}> Não existe nenhum cliente com este ID, certifica-te que estas ligado ao servidor do jogo e verifica o teu ID novamente!"
 		"ro"		"<@{1}> Nu există niciun client cu acest ID, fii sigur că ești conectat la joc si verifică ID din nou!"
