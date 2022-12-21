@@ -253,7 +253,7 @@
 		"pt_p"     	"Por favor, aguarda. O teu estatuto de membro ainda não foi obtido."
 		"ru"		"Пожалуйста, подождите. Ваш статус участника еще не был получен."
 		"sv"		"Vänta. Din medlemsstatus har inte hämtas än."
-		"ua" 		"Будь ласка, зачекайте. Ваш статус членства ще не отриманий".
+		"ua" 		"Будь ласка, зачекайте. Ваш статус членства ще не отриманий."
 	}
 	"MustVerify"
 	{
