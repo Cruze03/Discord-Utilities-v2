@@ -18,6 +18,7 @@
 		"ro"		"{green}[DU]{default}"
 		"ru"		"{green}[DU]{default}"
 		"sv"		"{green}[DU]{default}"
+		"tr"		"{green}[DU]{default}"
 		"ua"		"{green}[DU]{default}"
 	}
 	"DiscordVerificationInfoTitle"
@@ -45,8 +46,8 @@
 		"es"		"**Qué hacer:**\n\n**-** Únase a uno de nuestros servidores yendo al canal **#servers** y escriba **{1}** en el chat\n**-** Copia el código de verificación como se muestra en la imagen de abajo.\n**-** Pégalo aquí y **ten paciencia**"
  		"fi"        "**Mitä tehdä:**\n \n- Liity meidän serveriimme menemällä **#servers** kanavalle ja kirjoita **{1}** in chat\n**-** Kopioi vahvistus koodi  mikä näkyy kuvan alhaalla.\n**-** Sijoita se tänne ja **ole kärsivällinen**"
 		"hu"		"**Mi a teendő:**\n \n**-** Csatlakozz fel valamelyik szerverünkre és írd be a(z) **{1}** parancsot a chatre\n**-** Másold ki a hitelesítő kódot, a folyamatról képet láthatsz.\n**-** Másold be ide és **légy türelmes**"
-		"lv"		"**Ko darīt:**\n \n**-** Pievienojies vienam no mūsu serveriem **#servers** un raksti **{1}** čatā\n**-** Nokopē verifikācijas kodu kā tas ir parādīts bildē.\n**-** Įklijuokite čia ir **Būk kantrus**"
-		"lt"		"**Ką daryti:**\n \n**-** Prisijunkite prie vieno iš mūsų serverių apsilankę **#servers** kanale, ir parašykite **{1}** pokalbyje\n**-** Nukopijuokite patvirtinimo kodą, kaip parodyta paveikslėlyje žemiau.\n**-** Iekopē to šeit čatā un **gaidi**"
+		"lv"		"**Ko darīt:**\n \n**-** Pievienojies vienam no mūsu serveriem **#servers** un raksti **{1}** čatā\n**-** Nokopē verifikācijas kodu kā tas ir parādīts bildē.\n**-** Iekopē to šeit čatā un **gaidi**"
+		"lt"		"**Ką daryti:**\n \n**-** Prisijunkite prie vieno iš mūsų serverių apsilankę **#servers** kanale, ir parašykite **{1}** pokalbyje\n**-** Nukopijuokite patvirtinimo kodą, kaip parodyta paveikslėlyje žemiau.\n**-** Įklijuokite čia ir **Būk kantrus**" 
   		"no" 		"**Hva skal du gjøre:**\n \n**-** Bli med på en av våre servere ved å gå til **#servers** kanal og skriv {1} i chat\n**-** Kopier bekreftelseskoden som blir vist på bildet nedenfor.\n**-** Lim den inn her og **vær tålmodig**"
 		"pt_p"     	"**O que fazer:**\n \n**-** Juntar-te a um dos nossos servidores no canal **#servers** e escrever  **{1}** no chat\n**-** Copia o codigo de acordo com o exemplo da imagem abaixo.\n**-** Cola-o aqui e **espera um pouco**"
 		"ru"		"**Что делать:**\n \n**-** Подключиться к одному из наших серверов **#servers** канал и написать **{1}** в чат\n**-** Скопируйте код верификации, как показано на рисунке ниже.\n**-** Вставьте его в этот канал и **ожидайте**"
@@ -72,6 +73,7 @@
 		"ro"		"Ti-a verificat contul tău. ({green}{1}#{2}{default})"
 		"ru"		"Вы подтвердили свой аккаунт. ({green}{1}#{2}{default})"
 		"sv"		"Du har verifierat ditt konto. ({green}{1}#{2}{default})"
+		"tr"		"Hesabınızı bağladınız. ({green}{1}#{2}{default})"
 		"ua" 		"Ви підтвердили свій обліковий запис. ({green}{1}#{2}{default})"
 	}
 	"DiscordLinked"
@@ -93,6 +95,7 @@
 		"ro"		"<@{1}> Ti-a asociat contul cu succes! ✅"
 		"ru"		"<@{1}> Вы связали свой аккаунт! ✅"
 		"sv"		"<@{1}> Du har länkat ditt konto. ✅"
+		"tr"		"<@{1}> Hesabınızı bağladınız! ✅"
 		"ua" 		"<@{1}> ви пов'язали свій обліковий запис!✅"
 	}
 	"DiscordAlreadyLinked"
@@ -114,6 +117,7 @@
 		"ro"		"<@{1}> Acest cont de discord este deja asociat! ❌"
 		"ru"		"<@{1}> Эта учетная запись уже связана! ❌"
 		"sv"		"<@{1}> Denna discord link är redan länkad!  ❌"
+		"tr"		"<@{1}> Bu discord hesabı zaten bağlı! ❌"
 		"ua" 		"<@{1}> Цей обліковий запис вже пов'язаний! ❌"
 	}
 	"DiscordPleaseWait"
@@ -185,6 +189,7 @@
 		"ro"		"<@{1}> Acest canal este folosit pentru a-ți verifica contul!\nFolosește: {2} <cod de verificare>"
 		"ru"		"<@{1}> Этот канал используется для привязки аккаунта!\nИспользование: {2} <код подтверждения>"
 		"sv"		"<@{1}>  Den här kanalen används för kontolänkning!\nUsage: {2} <verifierings kod>"
+		"tr"		"<@{1}> Bu kanal, hesap bağlama için kullanılıyor!\nKullanım: {2} <doğrulama kodu>"
 		"ua" 		"<@{1}> Цей канал використовується для зв'язування облікового запису!nВикористання: {2} <підтвердити код>"
 
 	}
@@ -207,6 +212,7 @@
 		"ro"		"<@{1}> Trebuie să furnizați un ID pentru această comandă!"
 		"ru"		"<@{1}> Вам необходимо указать идентификатор для этой команды!"
 		"sv"		"<@{1}> Du måste andge ett ID för detta kommando!"
+		"tr" 		"<@{1}> Trebuie să furnizați un ID pentru această comandă!"
 		"ua" 		"<@{1}> потрібно вказати ідентифікатор для цієї команди!"
 
 	}
@@ -229,6 +235,7 @@
 		"ro"		"<@{1}> Acest ID nu este valid, te rog sa tastezi {2} în joc să incerci din nou!"
 		"ru"		"<@{1}> Этот идентификатор недействителен, введите в игре {2} и повторите попытку!"
 		"sv"		"<@{1}> Detta ID är inte giltigt, skriv {2} i spelet och försök igen!"
+		"tr"		"<@{1}> Bu ID geçerli değil, {2} yazın ve gelen ID ile tekrar deneyin!"
 		"ua" 		"<@{1}> Цей ідентифікатор недійсний, введіть {2} в грі і спробуйте ще раз!"
 	}
 	"DiscordInvalid"
@@ -250,6 +257,7 @@
 		"ro"		"<@{1}> Nu există niciun client cu acest ID, fii sigur că ești conectat la joc si verifică ID din nou!"
 		"ru"		"<@{1}> Игроa с таким кодом верификации нет, убедитесь, что вы подключены к игровому серверу, и проверьте свой код еще раз!"
 		"sv"		"<@{1}> Det finns ingen klient med detta ID, se till att du är ansluten till spelservern och kontrollera dit ID igen!"
+		"tr"		"<@{1}> Bu ID sahibi bulunamadı, sunucuda olduğunuzdan emin olun ve size verilen ID tekrar kontrol edin!"
 		"ua" 		"<@{1}> Игрокa з таким кодом перевірки недоступний, переконайтеся, що ви підключені до ігрового сервера і перевірте свій код ще раз!"
 	}
 	"TryAgainLater"
@@ -267,6 +275,7 @@
 		"pt_p"     	"Por favor, aguarda. O teu estatuto de membro ainda não foi obtido."
 		"ru"		"Пожалуйста, подождите. Ваш статус участника еще не был получен."
 		"sv"		"Vänta. Din medlemsstatus har inte hämtas än."
+		"tr" 		"Biraz bekle, bağlantınız henüz hazırlanmadı."
 		"ua" 		"Будь ласка, зачекайте. Ваш статус членства ще не отриманий."
 	}
 	"MustVerify"
@@ -288,6 +297,7 @@
 		"pt_p"     	"Tens de verificar a tua conta de {lightblue}Discord{default}! Escreve {orange}{1}"
 		"ru"		"Вы должны подтвердить свой {lightblue}Discord {default}учетная запись! Тип {orange}{1}"
 		"sv"		"Du måste verifiera ditt {lightblue}Discord {default}konto! Skriv {orange}{1}"
+		"tr"		"{lightblue}Discord {default}hesabınızı bağlamanız gerekiyor! {orange}{1} yazın"
 		"ua"		"Ви повинні підтвердити свій {lightblue}Discord {default}account! Введіть {orange}{1}"
 	}
 	"LinkConnect"
@@ -305,6 +315,7 @@
 		"pt_p"     	"Junta-te ao nosso servidor de Discord:"
 		"ru"		"Зайдите в discord сервер:"
 		"sv"		"Gå med i vår discord server:"
+		"tr"		"Discord sunucumuza katılın:"
 		"ua" 		"Перейти на сервер discord:"
 	}
 	"LinkUsage"
@@ -323,6 +334,7 @@
 		"pt_p"     	"Escreve {lime}{1} {2} {default}no {orange}{3}"
 		"ru"		"Введите {lime}{1} {2} {default}в {orange}{3}{default} канал"
 		"sv"		"Skriv  {lime}{1} {2} {default} från {orange}{3}{default} kanal."
+		"tr"		"{orange}#{3} {default}kanalına {lime}{1} {2} {default}yazın."
 		"ua" 		"Ви також можете {lime} Copy {default}it {orange}in the console{default} :)"
 	}
 	"CopyPasteFromConsole"
@@ -340,6 +352,7 @@
 		"pt_p"     	"Também podes {lime}copiar e colar {default}da consola {orange}{default} :)"
 		"ru"		"Вы также можете {lime} Скопировать {default}это {orange}в консоли{default} :)"
 		"sv"		"Du kan också {lime}kopiera och klistra in {default} från {orange} console {default} :)."
+		"tr"		"{orange}Konsoldan{default}daha kolay {lime}kopyala-yapıştır{default} yapabilirsiniz :)"
 		"ua" 		"Ви також можете {lime} Copy {default}it {orange}in the console{default} :)"
 	}
 	"DiscordRevoked"
@@ -358,6 +371,7 @@
 		"ro"        	"Numai faci parte din server-ul nostru de discord, rolul tău de membru a fost sters!"
 		"ru"		"Вы больше не находитесь на нашем сервере discord, поэтому ваш статус участника discord был аннулирован!"
 		"sv"		"Du är inte längre i våran discord server, därför hade din discord medlemsstatus återkallats!"
+		"tr" 		"Discord sunucumuzda olmadığınız için discord bağlantınız iptal edildi."
 		"ua" 		"Ви більше не перебуваєте на нашому сервері discord, тому ваше членство в discord скасовано!"
 	}
 }
