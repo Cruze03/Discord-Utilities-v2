@@ -13,6 +13,7 @@
 		"map"		""
 		"chat"		""
 		"verification"		""
+		"adminlog"		""
 	}
 	"MESSAGE_IDS"
 	{
@@ -30,7 +31,7 @@
 	}
 	"WEBHOOK_SETTINGS"
 	{
-		"map_thumnail"		"https://image.gametracker.com/images/maps/160x120/csgo/{MAPNAME}.jpg"
+		"map_thumbnail"		"https://image.gametracker.com/images/maps/160x120/csgo/{MAPNAME}.jpg"
 		"server_dns_name"		"MYCUSTOMDNS"
 	}
 	"VERIFICATION_SETTINGS"
