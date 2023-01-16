@@ -12,7 +12,7 @@ const int TIMEOUT_TIME = 30;
 
 char g_sInviteLink[64];
 
-char g_sChannelID[64], g_sChannelName[64], g_sMessageID[64], g_sGuildID[64], g_sRole[64], g_sCommand[5][256], g_sCommandInGame[5][256];
+char g_sChannelID[64], g_sChannelName[64], g_sMessageID[64], g_sGuildID[64], g_sRole[64], g_sCommand[6][256], g_sCommandInGame[6][256];
 bool g_bPrimary = false, g_bAddMessage = false, g_bLate = false;
 int g_iServerID = -1;
 
@@ -119,7 +119,7 @@ public void DUMain_OnConfigLoaded()
 	
 	if(count > 0)
 	{
-		for(i = 0; i <= count; i++)
+		for(i = 0; i <= 5; i++)
 		{
 			if(StrContains(g_sCommandInGame[i], "sm_") == 0)
 			{
@@ -134,7 +134,10 @@ public void DUMain_OnConfigLoaded()
 	{
 		if(StrContains(g_sCommandInGame[0], "sm_") == 0)
 		{
-			RegConsoleCmd(g_sCommandInGame[0], Command_Verify);
+			if(!CommandExists(g_sCommandInGame[0]))
+			{
+				RegConsoleCmd(g_sCommandInGame[0], Command_Verify);
+			}
 		}
 	}
 	
@@ -148,9 +151,10 @@ public void DUMain_OnConfigLoaded()
 
 	if(count > 0)
 	{
-		for(i = 0; i <= count; i++)
+		count > MAX_COMMANDS ? MAX_COMMANDS : count;
+		for(i = 0; i < count; i++)
 		{
-			if(StrContains(sValue[i], "sm_") == 0)
+			if(sValue[i][0])
 			{
 				AddCommandListener(Command_Block, sValue[i]);
 			}
@@ -158,7 +162,7 @@ public void DUMain_OnConfigLoaded()
 	}
 	else
 	{
-		if(StrContains(sBlockedCommands[0], "sm_") == 0)
+		if(sBlockedCommands[0])
 		{
 			AddCommandListener(Command_Block, sBlockedCommands);
 		}
@@ -178,7 +182,7 @@ public void DUMain_OnConfigLoaded()
 			{
 				do
 				{
-					if(kv.GetSectionName(sBuffer, 64) && StrContains(sBuffer, "sm_") == 0)
+					if(kv.GetSectionName(sBuffer, 64) && sBuffer[0])
 					{
 						AddCommandListener(Command_Block, sBuffer);
 					}
@@ -270,11 +274,6 @@ public Action Command_DeleteMessages(int client, int args)
 	if(!strcmp(g_sChannelID, ""))
 	{
 		ReplyToCommand(client, "[SM] Channel ID is empty in config file. Kindly fill that out first.");
-		return Plugin_Handled;
-	}
-	if(!strcmp(g_sMessageID, ""))
-	{
-		ReplyToCommand(client, "[SM] Message ID is empty in config file. Kindly let the plugin fill that out first.");
 		return Plugin_Handled;
 	}
 	
