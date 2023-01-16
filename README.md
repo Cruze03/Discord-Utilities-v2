@@ -11,7 +11,7 @@
 - Add `addons/sourcemod/plugins/du_serverdetails.smx`
 - Open `addons/sourcemod/configs/DiscordUtilitiesv2.txt`
 - Fill up the `key` in `BOT_TOKEN` section with your **BOT's Token Key**.
-- Fill up the `map_thumnail` in `WEBHOOK_SETTINGS` section with your **Custom Map Thumbnail URL**.
+- Fill up the `map_thumbnail` in `WEBHOOK_SETTINGS` section with your **Custom Map Thumbnail URL**.
 - Fill `map` in `CHANNEL_IDS` section with your server details **Channel ID**.
 - Fill up the `server_dns_name` in `WEBHOOK_SETTINGS` section with your **Custom DNS** or leave it empty to use regular public IP.
 - Add `addons/sourcemod/translations/du_serverdetails.phrases.txt` in your server.
