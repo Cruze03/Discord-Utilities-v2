@@ -86,4 +86,12 @@
 		"en"		"Direct Connect:"
 		"ru"		"Подключиться:"
 	}
+	"SERVER"
+	{
+		"en"		"SERVER"
+	}
+	"CONSOLE"
+	{
+		"en"		"CONSOLE"
+	}
 }
