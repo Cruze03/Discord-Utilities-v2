@@ -95,7 +95,7 @@
 - Add `addons/sourcemod/translations/du_adminlogs.phrases.txt` in your server.
 - Reload your current map.
 
-![AdminLogs](https://cdn.discordapp.com/attachments/756189500828549271/1064497650428301343/image.png)
+![AdminLogs](https://cdn.discordapp.com/attachments/756189500828549271/1064499566478630972/image.png)
 
 ## Server Tracker Module
 - This module is used for your convenience only. It helps you know which of your server is using which `serverid` & which server is `primary`.
