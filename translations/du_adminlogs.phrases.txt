@@ -1,0 +1,33 @@
+"Phrases"
+{
+	"LogClientOnly"
+	{
+		"#format"		"{1:s},{2:s},{3:s},{4:s},{5:s},{6:s}"
+		//{1} - Hostname
+		//{2} - Map displayname
+		//{3} - Timestamp
+		//{4} - Client name
+		//{5} - Client steamid
+		//{6} - Activity
+		// Putting all numbers ({1}, {2}, etc) is not compulsory. You can choose to not use anything.
+		
+		
+		"en"			"`Server: {1} | Map: {2}`\n{3}**{4}`[{5}]`** {6}"
+	}
+	"Log"
+	{
+		"#format"		"{1:s},{2:s},{3:s},{4:s},{5:s},{6:s},{7:s},{8:s}"
+		//{1} - Hostname
+		//{2} - Map displayname
+		//{3} - Timestamp
+		//{4} - Client name
+		//{5} - Client steamid
+		//{6} - Activity
+		//{7} - Target name
+		//{8} - Target steamid
+		// Putting all numbers ({1}, {2}, etc) is not compulsory. You can choose to not use anything.
+		
+		
+		"en"			"`Server: {1} | Map: {2}`\n{3}**{4}`[{5}]`** {6} **{7}`[{8}]`**"
+	}
+}
