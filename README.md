@@ -72,7 +72,7 @@
 - Add `addons/sourcemod/translations/du_calladmin.phrases.txt` in your server.
 - Reload your current map.
 
-![Bug Report](https://cdn.discordapp.com/attachments/756189500828549271/1051478038119981127/Calladmin.png)
+![CallAdmin](https://cdn.discordapp.com/attachments/756189500828549271/1051478038119981127/Calladmin.png)
 
 ## Sourcebans / MaterialAdmin Module
 - Add `addons/sourcemod/plugins/du_sourcebans.smx`
@@ -86,6 +86,16 @@
 - Reload your current map.
 
 ![Sourcebans or MaterialAdmin](https://cdn.discordapp.com/attachments/756189500828549271/1051478037734113320/Sourcebans.png)
+
+## Admin Logs Module
+- Add `addons/sourcemod/plugins/du_adminlogs.smx`
+- Open `addons/sourcemod/configs/DiscordUtilitiesv2.txt`
+- Fill up the `key` in `BOT_TOKEN` section with your **BOT's Token Key**.
+- Fill `adminlog` in `CHANNEL_IDS` section with your adminlog **Channel ID**.
+- Add `addons/sourcemod/translations/du_adminlogs.phrases.txt` in your server.
+- Reload your current map.
+
+![AdminLogs](https://cdn.discordapp.com/attachments/756189500828549271/1064497650428301343/image.png)
 
 ## Server Tracker Module
 - This module is used for your convenience only. It helps you know which of your server is using which `serverid` & which server is `primary`.
