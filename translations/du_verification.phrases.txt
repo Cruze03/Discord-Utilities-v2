@@ -353,7 +353,7 @@
 		"ru"		"Вы также можете {lime} Скопировать {default}это {orange}в консоли{default} :)"
 		"sv"		"Du kan också {lime}kopiera och klistra in {default} från {orange} console {default} :)."
 		"tr"		"{orange}Konsoldan{default}daha kolay {lime}kopyala-yapıştır{default} yapabilirsiniz :)"
-		"ua" 		"Ви також можете {lime} Copy {default}it {orange}in the console{default} :)"
+		"ua" 		"Ви також можете {lime}скопіювати {default}це {orange}в консолі{default} :)"
 	}
 	"DiscordRevoked"
 	{
