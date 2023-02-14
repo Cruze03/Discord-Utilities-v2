@@ -97,6 +97,8 @@ public void CallAdmin_OnReportPost(int client, int target, const char[] reason)
 	
 	char sTrans[128];
 	
+	g_iLastReportID = CallAdmin_GetReportID();
+	
 	DiscordWebHook hook = new DiscordWebHook(g_sCallAdmin_Webhook);
 	Format(sTrans, 128, "%T", "ReportMessageTitle", LANG_SERVER, g_iLastReportID);
 	
@@ -122,8 +124,6 @@ public void CallAdmin_OnReportPost(int client, int target, const char[] reason)
 	Format(sClient, sizeof(sClient), "[%s](http://www.steamcommunity.com/profiles/%s) (%s)", sCName, sCSteamID64, sCSteamID);
 	Format(sTarget, sizeof(sTarget), "[%s](http://www.steamcommunity.com/profiles/%s) (%s)", sTName, sTSteamID64, sTSteamID);
 	Format(sReason, sizeof(sReason), "%s", reason);
-	
-	g_iLastReportID = CallAdmin_GetReportID();
 	
 	Format(sReportID, sizeof(sReportID), "%i", g_iLastReportID);
 	Discord_EscapeString(sClient, sizeof(sClient));
