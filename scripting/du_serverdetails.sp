@@ -105,6 +105,11 @@ public void OnMapStart()
 	g_hRepeater = null;
 }
 
+public void OnMapEnd()
+{
+	g_bGameStart = false;
+}
+
 public void DUMain_OnServerPasswordChanged(const char[] oldVal, const char[] newVal)
 {
 	DUMain_GetServerPassword(g_sServerPassword);
@@ -152,11 +157,11 @@ public Action Timer_AddMessage(Handle timer)
 
 public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMessage message)
 {
-	char sMessageID[64];
-	message.GetID(sMessageID, 64);
-	
 	if(message.Author.IsBot && g_bAddMessage)
 	{
+		char sMessageID[64];
+		message.GetID(sMessageID, 64);
+		
 		strcopy(g_sMessageID, 64, sMessageID);
 		
 		DUMain_SetString("message_map", sMessageID, 64);
@@ -267,6 +272,10 @@ public void UpdateScores()
 		return;
 	}
 	if(strlen(g_sMessageID) < LEN_ID)
+	{
+		return;
+	}
+	if(!g_bGameStart)
 	{
 		return;
 	}
