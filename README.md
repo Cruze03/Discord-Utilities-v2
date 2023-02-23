@@ -95,6 +95,15 @@
 - Add `addons/sourcemod/translations/du_adminlogs.phrases.txt` in your server.
 - Reload your current map.
 
+## Crash Report Module
+- Add `addons/sourcemod/plugins/du_crashreport.smx`
+- Open `addons/sourcemod/configs/DiscordUtilitiesv2.txt`
+- Fill up the `key` in `BOT_TOKEN` section with your **BOT's Token Key**.
+- Fill `crashreport` in `CHANNEL_IDS` section with your crash report **Channel ID** which is only visible to admins.
+- Fill `crashreport_nonadmin` in `CHANNEL_IDS` section with your adminlog **Channel ID**.
+- Add `addons/sourcemod/translations/du_crashreport.phrases.txt` in your server.
+- Reload your current map.
+
 ![AdminLogs](https://cdn.discordapp.com/attachments/756189500828549271/1064499566478630972/image.png)
 
 ## Server Tracker Module
