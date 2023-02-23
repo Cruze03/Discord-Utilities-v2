@@ -1,0 +1,23 @@
+"Phrases"
+{
+	"ServerCrashedTitle"
+	{
+		"en"			"SERVER CRASHED!"
+	}
+	"CrashIDField"
+	{
+		"en"			"Crash ID"
+	}
+	"LinkField"
+	{
+		"en"			"Link to crash details"
+	}
+	"Map"
+	{
+		"en"			"Map"
+	}
+	"DirectConnect"
+	{
+		"en"			"Click to re-join"
+	}
+}
