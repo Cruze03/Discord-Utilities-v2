@@ -7,7 +7,7 @@
 StringMap g_smParser;
 SMCParser g_hParser;
 char g_sSection[64], g_sBotToken[256], g_sGuildID[64], g_sRole[64], g_sInviteLink[64], g_sCommand[256], g_sCommandInGame[256], g_sDatabaseName[64], g_sBlockedCommands[512], g_sTableName[64], g_sServersTableName[64], g_sAPIKey[128], g_sChat_Webhook[256], g_sBugReport_Webhook[256], g_sCallAdmin_Webhook[256], g_sBans_Webhook[256], g_sComms_Webhook[256], g_sReportPlayer_Webhook[256], g_sMapThumbnail[256], g_sUseSWGM[8], g_sServerDNS[64], g_sServerPassword[128];
-char g_sMap_ChannelID[64], g_sChat_ChannelID[64], g_sVerification_ChannelID[64], g_sAdminlog_ChannelID[64];
+char g_sMap_ChannelID[64], g_sChat_ChannelID[64], g_sVerification_ChannelID[64], g_sAdminlog_ChannelID[64], g_sCrashReport_ChannelID[64], g_sCrashReport_ChannelID2[64];
 char g_sMap_MessageID[64], g_sVerification_MessageID[64];
 
 bool g_bPrimary, g_bReady;
@@ -282,6 +282,14 @@ public SMCResult Config_KeyValue(SMCParser smc, const char[] key, const char[] v
 		{
 			strcopy(g_sAdminlog_ChannelID, 64, value);
 		}
+		else if(!strcmp(key, "crashreport", false))
+		{
+			strcopy(g_sCrashReport_ChannelID, 64, value);
+		}
+		else if(!strcmp(key, "crashreport_nonadmin", false))
+		{
+			strcopy(g_sCrashReport_ChannelID2, 64, value);
+		}
 	}
 	else if(!strcmp(g_sSection, "MESSAGE_IDS"))
 	{
@@ -421,6 +429,8 @@ public void Config_End(SMCParser smc, bool halted, bool failed)
 	g_smParser.SetString("channel_chat", g_sChat_ChannelID);
 	g_smParser.SetString("channel_verification", g_sVerification_ChannelID);
 	g_smParser.SetString("channel_adminlog", g_sAdminlog_ChannelID);
+	g_smParser.SetString("channel_crashreport", g_sCrashReport_ChannelID);
+	g_smParser.SetString("channel_crashreport_nonadmin", g_sCrashReport_ChannelID2);
 	g_smParser.SetString("message_map", g_sMap_MessageID);
 	g_smParser.SetString("message_verification", g_sVerification_MessageID);
 	g_smParser.SetString("webhook_chat", g_sChat_Webhook);
