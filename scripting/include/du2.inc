@@ -3,7 +3,7 @@
 #endif
 #define _discord_utilities_v2_included
 
-#define DU_VERSION "1.0.3"
+#define DU_VERSION "1.0.4"
 
 const int LEN_ID = 10;				// Channel ID length less than this value is considered invalid
 const int MAX_COMMANDS = 64;		// Max commands possible in "VERIFICATION_SETTINGS" > "blocked_commands"
@@ -43,7 +43,7 @@ stock void Discord_EscapeString(char[] string, int maxlen, bool name = false)
 	ReplaceString(string, maxlen, "#", "＃");
 	ReplaceString(string, maxlen, "@", "＠");
 	//ReplaceString(string, maxlen, ":", "");
-	ReplaceString(string, maxlen, "_", "ˍ");
+	ReplaceString(string, maxlen, "_", "\\_");
 	ReplaceString(string, maxlen, "'", "＇");
 	ReplaceString(string, maxlen, "`", "＇");
 	ReplaceString(string, maxlen, "~", "∽");
