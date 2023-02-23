@@ -29,7 +29,7 @@
 - Reload your current map.
 
 ![Chat Relay](https://cdn.discordapp.com/attachments/756189500828549271/1010851311358586931/chat_relay1.png)
-![Chat Relay](https://cdn.discordapp.com/attachments/756189500828549271/1010851312038072400/chat_relay2.png)
+![Chat Relay2](https://cdn.discordapp.com/attachments/756189500828549271/1010851312038072400/chat_relay2.png)
 
 ## Verification Module
 - Add `addons/sourcemod/plugins/du_verification.smx`
@@ -95,16 +95,21 @@
 - Add `addons/sourcemod/translations/du_adminlogs.phrases.txt` in your server.
 - Reload your current map.
 
+![AdminLogs](https://cdn.discordapp.com/attachments/756189500828549271/1064499566478630972/image.png)
+
 ## Crash Report Module
 - Add `addons/sourcemod/plugins/du_crashreport.smx`
 - Open `addons/sourcemod/configs/DiscordUtilitiesv2.txt`
 - Fill up the `key` in `BOT_TOKEN` section with your **BOT's Token Key**.
 - Fill `crashreport` in `CHANNEL_IDS` section with your crash report **Channel ID** which is only visible to admins.
 - Fill `crashreport_nonadmin` in `CHANNEL_IDS` section with your adminlog **Channel ID**.
+- Fill up the `server_dns_name` in `WEBHOOK_SETTINGS` section with your custom dns or leave it empty.
 - Add `addons/sourcemod/translations/du_crashreport.phrases.txt` in your server.
 - Reload your current map.
 
-![AdminLogs](https://cdn.discordapp.com/attachments/756189500828549271/1064499566478630972/image.png)
+![CrashReport1](https://cdn.discordapp.com/attachments/756189500828549271/1078406956684955688/crashreport.png)
+
+![CrashReport2](https://cdn.discordapp.com/attachments/756189500828549271/1078406957028872313/crashreport_nonadmin.png)
 
 ## Server Tracker Module
 - This module is used for your convenience only. It helps you know which of your server is using which `serverid` & which server is `primary`.
