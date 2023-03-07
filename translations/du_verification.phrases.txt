@@ -335,7 +335,7 @@
 		"ru"		"Введите {lime}{1} {2} {default}в {orange}{3}{default} канал"
 		"sv"		"Skriv  {lime}{1} {2} {default} från {orange}{3}{default} kanal."
 		"tr"		"{orange}#{3} {default}kanalına {lime}{1} {2} {default}yazın."
-		"ua" 		"Ви також можете {lime} Copy {default}it {orange}in the console{default} :)"
+		"ua" 		"Введіть {lime}{1} {2} {default}на {orange}{3}{default} канал :)"
 	}
 	"CopyPasteFromConsole"
 	{
