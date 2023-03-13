@@ -24,7 +24,7 @@ bool g_bIsMySQl;
 
 Handle g_hOnLinkedAccount, g_hOnAccountRevoked, g_hOnClientLoaded, g_hOnBlockedCommandUse, g_hDeleteTimer;
 
-ArrayList g_hDeleteMessage;
+ArrayList g_hDeleteMessage, g_aUserIDs;
 StringMap g_smDeleteMessage;
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
@@ -151,7 +151,7 @@ public void DUMain_OnConfigLoaded()
 
 	if(count > 0)
 	{
-		count > MAX_COMMANDS ? MAX_COMMANDS : count;
+		count = count > MAX_COMMANDS ? MAX_COMMANDS : count;
 		for(i = 0; i < count; i++)
 		{
 			if(sValue[i][0])
@@ -381,6 +381,33 @@ public int SQLQuery_ConnectCallback(Database db, DBResultSet results, const char
 	if(db == null)
 	{
 		LogError("[DUv2-ConnectCallback] Database failure: %s", error);
+		return;
+	}
+	char sQuery[256];
+	g_hDB.Format(sQuery, sizeof(sQuery), "SELECT userid FROM %s", g_sTableName);
+	g_hDB.Query(SQLQuery_GetUserIDs, sQuery);
+}
+
+public int SQLQuery_GetUserIDs(Database db, DBResultSet results, const char[] error, any userid)
+{
+	if(db == null)
+	{
+		LogError("[DUv2-GetUserIDs] Query failure: %s", error);
+		return;
+	}
+	g_aUserIDs = new ArrayList(ByteCountToCells(32));
+	if(results.RowCount == 0)
+	{
+		return;
+	}
+	char sBuffer[20];
+	while(results.FetchRow())
+	{
+		results.FetchString(0, sBuffer, 20);
+		if(g_aUserIDs.FindString(sBuffer) == -1)
+		{
+			g_aUserIDs.PushString(sBuffer);
+		}
 	}
 }
 	
@@ -851,6 +878,14 @@ public void OnMessageReceived(DiscordBot bot, DiscordChannel channel, DiscordMes
 	
 	if(id != g_iServerID)
 	{
+		return;
+	}
+	
+	if(g_aUserIDs.FindString(sUserID) != -1)
+	{
+		Format(sReply, 256, "%T", "DiscordUserIDExists", LANG_SERVER, sUserID);
+		SendMessageToChannel(channel, sReply);
+		DUMain_Bot().DeleteMessageID(g_sChannelID, sMessageID);
 		return;
 	}
 	
