@@ -260,6 +260,11 @@
 		"tr"		"<@{1}> Bu ID sahibi bulunamadı, sunucuda olduğunuzdan emin olun ve size verilen ID tekrar kontrol edin!"
 		"ua" 		"<@{1}> Игрокa з таким кодом перевірки недоступний, переконайтеся, що ви підключені до ігрового сервера і перевірте свій код ще раз!"
 	}
+	"DiscordUserIDExists"
+	{
+		"#format"	"{1:s}"
+		"en"		"<@{1}> This discord account is already verified by some other steam account."
+	}
 	"TryAgainLater"
 	{
 		"en"		"Please wait. Your member status hasn't been fetched yet."
