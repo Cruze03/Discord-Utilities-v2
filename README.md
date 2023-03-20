@@ -107,6 +107,8 @@
 - Add `addons/sourcemod/translations/du_crashreport.phrases.txt` in your server.
 - Reload your current map.
 
+### Console history works in Windows only
+
 ![CrashReport1](https://cdn.discordapp.com/attachments/756189500828549271/1078406956684955688/crashreport.png)
 
 ![CrashReport2](https://cdn.discordapp.com/attachments/756189500828549271/1078406957028872313/crashreport_nonadmin.png)
