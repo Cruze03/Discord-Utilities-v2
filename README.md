@@ -1,5 +1,3 @@
-# [Join the DU discord server for latest binary and support](https://discord.gg/WCNjEDPD2v)
-
 ## Requirements to run these plugin(s)
 **-** [**New Discord API Plugin**](https://github.com/Cruze03/discord-api/blob/main/discord_api.smx) (Remove the [old one](https://github.com/Cruze03/sourcemod-discord/blob/master/discord_api.smx) to avoid conflicts) (**Please restart server when first added / when new version added**)
 
